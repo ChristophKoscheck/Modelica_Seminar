@@ -5,4 +5,4 @@
 
 - Paul Smidt
 - Alexander Leitz
-- Christoph Kosch
+- Christoph Koscheck
