@@ -13,13 +13,13 @@ package DroneFlightControl
     end Controller;
 
     class Ground
-      //constants
+      // constants
       import Modelica.Constants.inf;
-      //parameter
-      //variables
-      Modelica.Units.SI.Height height;
-      Modelica.Units.SI.Distance distance;
-      Modelica.Units.SI.Velocity velocity;
+      // parameter
+      // variables
+      Modelica.Units.SI.Height height;        // current flight height
+      Modelica.Units.SI.Distance distance;    // current flight distance
+      Modelica.Units.SI.Velocity velocity;    // current flight velocity
       
     equation
       der(distance) = velocity;
