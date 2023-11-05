@@ -1,5 +1,4 @@
 package DroneFlightControl
-
   package flight_control
     model Controller
       // constants
@@ -13,24 +12,32 @@ package DroneFlightControl
       Modelica.Units.SI.Distance currDistance "Current flight distance";
       Modelica.Units.SI.AngularVelocity currReqRPM;
       //connectors
+      Modelica.Mechanics.Rotational.Sources.Torque torque annotation(
+        Placement(visible = true, transformation(origin = {0, 0}, extent = {{-25, -20}, {-5, 0}}, rotation = 0)));
+      Modelica.Mechanics.Rotational.Components.Inertia inertia1(J = 1, a(fixed = true, start = 0), phi(fixed = true, start = 0)) annotation(
+        Placement(visible = true, transformation(origin = {0, 0}, extent = {{2, -20}, {22, 0}}, rotation = 0)));
       Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{22, -50}, {2, -30}}, rotation = 0)));
-      Modelica.Blocks.Continuous.LimPID PI( Ni = 0.5,Td = 0.1, Ti = 0.1, controllerType = Modelica.Blocks.Types.SimpleController.PID, initType =               Modelica.Blocks.Types.Init.SteadyState, k = 50, limiter(u(start = 0))) annotation(
+      Modelica.Blocks.Continuous.LimPID PI(Ni = 0.1, Td = 0.1, Ti = 0.1, controllerType = Modelica.Blocks.Types.SimpleController.PI, initType = Modelica.Blocks.Types.Init.SteadyState, k = 100, limiter(u(start = 0)), yMax = 12) annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-56, -20}, {-36, 0}}, rotation = 0)));
-    Modelica.Blocks.Sources.RealExpression realExpression(y = currHeightProfile)  annotation(
+      Modelica.Blocks.Sources.RealExpression realExpression(y = currHeightProfile) annotation(
         Placement(visible = true, transformation(origin = {-78, 32}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain gain(k = 2000)  annotation(
+      Modelica.Blocks.Math.Gain gain(k = 20/9.55) annotation(
         Placement(visible = true, transformation(origin = {-74, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealOutput ctrlRefomega annotation(
+      Modelica.Blocks.Interfaces.RealOutput ctrlRefomega annotation(
         Placement(visible = true, transformation(origin = {64, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {58, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Mechanics.Rotational.Sources.Torque torque annotation(
-        Placement(visible = true, transformation(origin = {0, 0}, extent = {{-25, -20}, {-5, 0}}, rotation = 0)));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia1(J = 1, a(fixed = true, start = 0), phi(fixed = true, start = 0), w(start = 0)) annotation(
-        Placement(visible = true, transformation(origin = {0, 0}, extent = {{2, -20}, {22, 0}}, rotation = 0)));
+      DroneFlightControl.flight_control.omegaAngularVel omegaAngularVel annotation(
+        Placement(visible = true, transformation(origin = {64, -72}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {78, -61}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       currDistance = flightVelocity*time;
       currHeightProfile = (2.065361*exp(-(((currDistance/flightVelocity) - 70.00864)^2)/(2*(22.97585^2))));
       currReqRPM = currHeightProfile^2;
+      connect(PI.y, torque.tau) annotation(
+        Line(points = {{-35, -10}, {-27, -10}}, color = {0, 0, 127}));
+      connect(torque.flange, inertia1.flange_a) annotation(
+        Line(points = {{-5, -10}, {2, -10}}));
+      connect(speedSensor.flange, inertia1.flange_b) annotation(
+        Line(points = {{22, -40}, {22, -10}}));
       connect(speedSensor.w, PI.u_m) annotation(
         Line(points = {{1, -40}, {-46, -40}, {-46, -22}}, color = {0, 0, 127}));
       connect(gain.y, PI.u_s) annotation(
@@ -39,12 +46,8 @@ package DroneFlightControl
         Line(points = {{-66, 32}, {-52, 32}, {-52, 18}, {-94, 18}, {-94, -10}, {-86, -10}}, color = {0, 0, 127}));
       connect(speedSensor.w, ctrlRefomega) annotation(
         Line(points = {{2, -40}, {-12, -40}, {-12, -64}, {40, -64}, {40, -10}, {64, -10}}, color = {0, 0, 127}));
-      connect(PI.y, torque.tau) annotation(
-        Line(points = {{-35, -10}, {-27, -10}}, color = {0, 0, 127}));
-      connect(speedSensor.flange, inertia1.flange_b) annotation(
-        Line(points = {{22, -40}, {22, -10}}));
-      connect(torque.flange, inertia1.flange_a) annotation(
-        Line(points = {{-5, -10}, {2, -10}}));
+      connect(speedSensor.w, omegaAngularVel) annotation(
+        Line(points = {{2, -40}, {-18, -40}, {-18, -72}, {64, -72}}, color = {0, 0, 127}));
       annotation(
         Icon(coordinateSystem(grid = {1, 1})),
         experiment(StartTime = 0, StopTime = 200, Tolerance = 1e-06, Interval = 0.01),
@@ -91,12 +94,11 @@ package DroneFlightControl
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}})));
     end pid_control;
 
-    connector rpm
-      Modelica.Units.SI.Length s;
-      flow Real omega(unit = "rpm") "revolutions per minute value";
+    connector omegaAngularVel
+      flow Real omega(unit = "rad/s");
       annotation(
-        Icon(coordinateSystem(grid = {1, 1})));
-    end rpm;
+        Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(origin = {3, -7.5}, fillColor = {255, 85, 127}, fillPattern = FillPattern.Solid, extent = {{-55, 52.5}, {55, -52.5}})}));
+    end omegaAngularVel;
 
     connector heightConnect
       Modelica.Units.SI.Length s;
@@ -152,8 +154,9 @@ package DroneFlightControl
     annotation(
       Icon(coordinateSystem(grid = {1, 1})));
   end flight_control;
+
   package e_motor
-  model Gleichstrommotor
+    model Gleichstrommotor
       //Parameter
       parameter Real J = 0.003 "Trägheitsmoment des Motors (kg*m^2)";
       parameter Real B = 0.5 "Viskoser Dämpfungskoeffizient (N*m*s/rad)";
@@ -173,8 +176,11 @@ package DroneFlightControl
       Real i(fixed = false) "Strom durch die Wicklung (A)";
       Real tau "Motor-Drehmoment (N*m)";
       Real integral_error "Integralfehler (rad)";
-   
+      Real test;
+      DroneFlightControl.flight_control.omegaAngularVel omegaAngularVel annotation(
+        Placement(visible = true, transformation(origin = {-44, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-48, -62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
+      test = omegaAngularVel.omega*10;
       tau = K*i;
       J*der(omegaOut) = tau - B*omegaOut;
       L*der(i) = min(maxCurrent, u) - R*i - K*omegaOut;
@@ -192,7 +198,7 @@ package DroneFlightControl
   end e_motor;
 
   package propeller_env
-  class propeller
+    class propeller
       //Parameter
       parameter Real c_w = 0.5 "Drag coefficient";
       parameter Modelica.Units.SI.Diameter d = 0.3 "Diameter";
@@ -238,7 +244,6 @@ package DroneFlightControl
     end Auftrieb;
 
     model Auftrieb2
-      import Modelica.Constants.pi;
       //Parameter
       parameter Real p_air = 1.225 "Air density";
       parameter Real A_prop = 0.13 "Area of the propeller";
@@ -261,17 +266,15 @@ package DroneFlightControl
       Real Acc_prop "acceleration per propeller";
       Real V_prop "Velocity of System";
       Real F_w "Flow resistance";
-      Real n_prop "";
-    
     equation
-      // omegaIn = if time <= 10 then initialSpeed + (finalSpeed - initialSpeed)*time/10 else finalSpeed;
+// omegaIn = if time <= 10 then initialSpeed + (finalSpeed - initialSpeed)*time/10 else finalSpeed;
       F_auf = NoP*F_prop;
 //Force of all propellers
       F_prop = T_prop/r_prop - F_w;
 //Force of one propeller
       T_prop = 0.5*p_air*A_prop*C_l*d_prop^2*w_prop^2;
 //Torque of one propeller
-      w_prop = d_prop*n_prop*Modelica.Constants.pi/60;
+      w_prop = d_prop*omegaIn*Modelica.Constants.pi/60;
 //Angular velocity of one propeller
       Acc_prop = F_prop/Masse;
 //Acceleration of one propeller
@@ -279,25 +282,26 @@ package DroneFlightControl
 //Acceleration of the system
       F_w = A_drone*c_w*0.5*p_air*V_prop^2;
 //Flow resistance
-      n_prop = (omegaIn * 60) / (2 * pi);
     end Auftrieb2;
   end propeller_env;
 
   model DroneFlightControlFly
-  DroneFlightControl.e_motor.Gleichstrommotor gleichstrommotor annotation(
+    DroneFlightControl.e_motor.Gleichstrommotor gleichstrommotor annotation(
       Placement(visible = true, transformation(origin = {50, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  DroneFlightControl.flight_control.Controller controller annotation(
+    DroneFlightControl.flight_control.Controller controller annotation(
       Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  DroneFlightControl.propeller_env.Auftrieb2 auftrieb2 annotation(
+    DroneFlightControl.propeller_env.Auftrieb2 auftrieb2 annotation(
       Placement(visible = true, transformation(origin = {50, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-  connect(controller.ctrlRefomega, gleichstrommotor.desiredSpeed) annotation(
+    connect(controller.ctrlRefomega, gleichstrommotor.desiredSpeed) annotation(
       Line(points = {{-24, -10}, {45, -10}}, color = {0, 0, 127}));
-  connect(gleichstrommotor.omegaOut, auftrieb2.omegaIn) annotation(
+    connect(gleichstrommotor.omegaOut, auftrieb2.omegaIn) annotation(
       Line(points = {{52, -10}, {68, -10}, {68, 16}, {14, 16}, {14, 34}, {44, 34}}, color = {0, 0, 127}));
+    connect(controller.omegaAngularVel, gleichstrommotor.omegaAngularVel) annotation(
+      Line(points = {{-22, -16}, {46, -16}}));
     annotation(
       Icon(coordinateSystem(grid = {1, 1})),
-  experiment(StartTime = 0, StopTime = 200, Tolerance = 1e-6, Interval = 0.01));
+      experiment(StartTime = 0, StopTime = 200, Tolerance = 1e-06, Interval = 0.01));
   end DroneFlightControlFly;
   annotation(
     Icon(coordinateSystem(grid = {1, 1})),
