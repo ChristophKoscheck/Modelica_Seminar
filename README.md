@@ -15,3 +15,9 @@ Modelle werden simuliert (System kann auch nur aus Modellen aufgebaut werden, Cl
 
 ## Drohnenmodell DJI Inspire 3 (Landegestell unten):
 https://www.dji.com/de/inspire-3/specs
+
+## Fragen 
+Connectoren type / unit etc muss konsistent sein?
+Plots nebeneinander
+RealInput RealOutput gilt als Connector?
+Modelica Library Blocks wie verwenden (Unit?)
