@@ -15,6 +15,7 @@ package DroneFlightControl
       // variables
       Modelica.Units.SI.Height currHeightProfile(start = initialHeight) "Current flight height";
       Modelica.Units.SI.Distance currDistance "Current flight distance";
+      Modelica.Units.SI.AngularVelocity currReqRPM;
       //connectors
       Modelica.Mechanics.Rotational.Sources.Torque torque annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-25, -20}, {-5, 0}}, rotation = 0)));
@@ -31,10 +32,13 @@ package DroneFlightControl
       Modelica.Blocks.Continuous.LimPID PI(Ni = 0.1, Td = 0.1, Ti = 0.1, controllerType = Modelica.Blocks.Types.SimpleController.PI, initType =               Modelica.Blocks.Types.Init.SteadyState, k = 100, limiter(u(start = 0)), yMax = 12) annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-56, -20}, {-36, 0}}, rotation = 0)));
     Modelica.Blocks.Sources.RealExpression realExpression(y = currHeightProfile)  annotation(
-        Placement(visible = true, transformation(origin = {-70, 28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-78, 32}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Gain gain(k = 20/9.55)  annotation(
+        Placement(visible = true, transformation(origin = {-74, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       currDistance = flightVelocity*time;
       currHeightProfile = (2.065361*exp(-(((currDistance/flightVelocity) - 70.00864)^2)/(2*(22.97585^2))));
+      currReqRPM = currHeightProfile^2;
       connect(PI.y, torque.tau) annotation(
         Line(points = {{-35, -10}, {-27, -10}}, color = {0, 0, 127}));
       connect(torque.flange, inertia1.flange_a) annotation(
@@ -49,11 +53,13 @@ package DroneFlightControl
         Line(points = {{88, -10}, {80, -10}}));
       connect(speedSensor.w, PI.u_m) annotation(
         Line(points = {{1, -40}, {-46, -40}, {-46, -22}}, color = {0, 0, 127}));
-  connect(realExpression.y, PI.u_s) annotation(
-        Line(points = {{-58, 28}, {-56, 28}, {-56, 14}, {-80, 14}, {-80, -10}, {-58, -10}}, color = {0, 0, 127}));
+  connect(gain.y, PI.u_s) annotation(
+        Line(points = {{-63, -10}, {-58, -10}}, color = {0, 0, 127}));
+  connect(realExpression.y, gain.u) annotation(
+        Line(points = {{-66, 32}, {-52, 32}, {-52, 18}, {-94, 18}, {-94, -10}, {-86, -10}}, color = {0, 0, 127}));
       annotation(
         Icon(coordinateSystem(grid = {1, 1})),
-        experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-06, Interval = 0.04),
+        experiment(StartTime = 0, StopTime = 200, Tolerance = 1e-06, Interval = 0.01),
         Diagram(graphics = {Rectangle(lineColor = {255, 0, 0}, extent = {{-99, 48}, {-32, 8}}), Rectangle(lineColor = {255, 0, 0}, extent = {{-25, 6}, {99, -50}}), Text(textColor = {255, 0, 0}, extent = {{4, 14}, {71, 7}}, textString = "plant (simple drive train)"), Text(textColor = {255, 0, 0}, extent = {{-98, -46}, {-60, -52}}, textString = "PI controller"), Text(textColor = {255, 0, 0}, extent = {{-98, 59}, {-31, 51}}, textString = "reference speed generation"), Line(points = {{-76, -44}, {-57, -23}}, color = {255, 0, 0}, arrow = {Arrow.None, Arrow.Filled})}, coordinateSystem(extent = {{-100, -100}, {100, 100}})));
     end Controller;
 
