@@ -17,9 +17,8 @@ package propeller_env
     parameter Real d_prop = 0.4 "Diameter of the propeller";
     parameter Real C_l = 0.006 "Lift coefficient";
     parameter Real NoP = 4 "Number of propellers";
-    //parameter Real n_prop = 1500 "RPM Engine/Propeller";
-    parameter Real initialSpeed = 1000; // Anfangsdrehzahl in Umdrehungen pro Minute (rpm)
-    parameter Real finalSpeed = 3000; // Enddrehzahl in Umdrehungen pro Minute (rpm)
+    parameter Real initialSpeed = 1000 "Start RPM";
+    parameter Real finalSpeed = 3000 "End RPM";
     parameter Real Masse = 4 "System Mass";
   
     //Variablen
@@ -35,12 +34,12 @@ package propeller_env
 
     n_prop = if time <= 10 then initialSpeed + (finalSpeed - initialSpeed) * time / 10 else finalSpeed;
   
-    F_auf = NoP * F_prop;
-    F_prop = T_prop / r_prop;
-    T_prop = 0.5 * p_air * A_prop * C_l * d_prop^2 * w_prop^2;
-    w_prop = 2 * n_prop * Modelica.Constants.pi / 60;
-    Acc_prop = F_prop/Masse;
-  der(Acc_prop) = V_prop;
+    F_auf = NoP * F_prop; //Force of all propellers
+    F_prop = T_prop / r_prop; //Force of one propeller
+    T_prop = 0.5 * p_air * A_prop * C_l * d_prop^2 * w_prop^2; //Torque of one propeller
+    w_prop = 2 * n_prop * Modelica.Constants.pi / 60; //Angular velocity of one propeller
+    Acc_prop = F_prop/Masse; //Acceleration of one propeller
+  der(Acc_prop) = V_prop;//Acceleration of the system
   end Auftrieb;
   
   model Auftrieb2
@@ -51,9 +50,8 @@ package propeller_env
     parameter Real d_prop = 0.4 "Diameter of the propeller";
     parameter Real C_l = 0.006 "Lift coefficient";
     parameter Real NoP = 4 "Number of propellers";
-    //parameter Real n_prop = 1500 "RPM Engine/Propeller";
-    parameter Real initialSpeed = 1000; // Anfangsdrehzahl in Umdrehungen pro Minute (rpm)
-    parameter Real finalSpeed = 14000; // Enddrehzahl in Umdrehungen pro Minute (rpm)
+    parameter Real initialSpeed = 1000 "Start RPM";
+    parameter Real finalSpeed = 14000 "End RPM";
     parameter Real Masse = 4 "System Mass";
     parameter Real c_w = 0.14;
     parameter Real A_drone = 0.5 "Dem wind ausgesetzte Drohnenoberfläche";
@@ -71,13 +69,13 @@ package propeller_env
   
     n_prop = if time <= 10 then initialSpeed + (finalSpeed - initialSpeed) * time / 10 else finalSpeed;
   
-    F_auf = NoP * F_prop;
-    F_prop = T_prop / r_prop - F_w;
-    T_prop = 0.5 * p_air * A_prop * C_l * d_prop^2 * w_prop^2;
-    w_prop = d_prop * n_prop * Modelica.Constants.pi / 60;
-    Acc_prop = F_prop/Masse;
-    der(V_prop) = Acc_prop;
-    F_w = A_drone * c_w * 0.5 * p_air *V_prop^2;
+    F_auf = NoP * F_prop; //Force of all propellers
+    F_prop = T_prop / r_prop - F_w; //Force of one propeller
+    T_prop = 0.5 * p_air * A_prop * C_l * d_prop^2 * w_prop^2; //Torque of one propeller
+    w_prop = d_prop * n_prop * Modelica.Constants.pi / 60; //Angular velocity of one propeller
+    Acc_prop = F_prop/Masse; //Acceleration of one propeller
+    der(V_prop) = Acc_prop; //Acceleration of the system
+    F_w = A_drone * c_w * 0.5 * p_air *V_prop^2; //Flow resistance
   
   
   end Auftrieb2;
