@@ -249,16 +249,17 @@ package DroneFlightControl
 
 model Auftrieb2
   //Parameter
-    //Variablen
-  Modelica.Blocks.Interfaces.RealInput omegaIn "Propeller speed" annotation(
-    Placement(visible = true, transformation(origin = {-56, 2}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-56, 2}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  Modelica.Units.SI.AngularVelocity w_prop "Propeller angular velocity";
+      //Variablen
+      Modelica.Units.SI.AngularVelocity w_prop "Propeller angular velocity";
   Modelica.Units.SI.Force F_auf "Lift force";
   Modelica.Units.SI.Force F_prop "Propeller force";
   Modelica.Units.SI.Torque T_prop "Propeller torque";
   Modelica.Units.SI.Acceleration Acc_prop "acceleration per propeller";
   Modelica.Units.SI.velocity V_prop "Velocity of System";
   Modelica.Units.SI.Resistance F_w "Flow resistance";
+  Modelica.Mechanics.Rotational.Interfaces.Flange RPM annotation(
+        Placement(visible = true, transformation(origin = {-54, -54}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-44, -28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+
 equation
 // omegaIn = if time <= 10 then initialSpeed + (finalSpeed - initialSpeed)*time/10 else finalSpeed;
   F_auf = propeller.NoP*F_prop;
@@ -275,6 +276,7 @@ equation
 //Acceleration of the system
   F_w = drone.A_drone*propeller.c_w*0.5*environment.p_air*V_prop^2;
 //Flow resistance
+
 end Auftrieb2;
 
     class environment
@@ -291,22 +293,27 @@ end Auftrieb2;
 
   model DroneFlightControlFly
     DroneFlightControl.e_motor.Gleichstrommotor gleichstrommotor annotation(
-      Placement(visible = true, transformation(origin = {50, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {10, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     DroneFlightControl.flight_control.Controller controller annotation(
-      Placement(visible = true, transformation(origin = {-30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-78, 14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     DroneFlightControl.propeller_env.Auftrieb2 auftrieb2 annotation(
-      Placement(visible = true, transformation(origin = {50, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {70, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(controller.ctrlRefomega, gleichstrommotor.desiredSpeed) annotation(
-      Line(points = {{-24, -10}, {45, -10}}, color = {0, 0, 127}));
-    connect(gleichstrommotor.omegaOut, auftrieb2.omegaIn) annotation(
-      Line(points = {{52, -10}, {68, -10}, {68, 16}, {14, 16}, {14, 34}, {44, 34}}, color = {0, 0, 127}));
+      Line(points = {{-72, 13}, {-5.5, 13}, {-5.5, 8}, {5, 8}}, color = {0, 0, 127}));
     connect(controller.omegaAngularVel, gleichstrommotor.omegaAngularVel) annotation(
-      Line(points = {{-22, -16}, {46, -16}}));
+      Line(points = {{-70, 8}, {-32.5, 8}, {-32.5, 2}, {5, 2}}));
     annotation(
       Icon(coordinateSystem(grid = {1, 1})),
       experiment(StartTime = 0, StopTime = 200, Tolerance = 1e-06, Interval = 0.01));
   end DroneFlightControlFly;
+
+  connector Connector_2
+  Modelica.Mechanics.Rotational.Interfaces.Flange flange annotation(
+      Placement(visible = true, transformation(origin = {-42, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-42, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  annotation(
+      Icon(graphics = {Rectangle(origin = {3, 5}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, extent = {{-43, 25}, {43, -25}})}));
+  end Connector_2;
   annotation(
     Icon(coordinateSystem(grid = {1, 1})),
     uses(Modelica(version = "4.0.0")));
