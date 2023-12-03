@@ -171,25 +171,25 @@ package DroneFlightControl
       input Modelica.Blocks.Interfaces.RealInput desiredSpeed "Gewünschte Drehzahl (rad/s)" annotation(
         Placement(visible = true, transformation(origin = {-52, -2}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-52, -2}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       output Real u "Stromzufuhr (A)";
-      output Modelica.Blocks.Interfaces.RealOutput omegaOut "Aktuelle Drehzahl (rad/s)" annotation(
-        Placement(visible = true, transformation(origin = {50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 90), iconTransformation(origin = {14, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Real i(fixed = false) "Strom durch die Wicklung (A)";
       Real tau "Motor-Drehmoment (N*m)";
       Real integral_error "Integralfehler (rad)";
       Real test;
       DroneFlightControl.flight_control.omegaAngularVel omegaAngularVel annotation(
         Placement(visible = true, transformation(origin = {-44, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-48, -62}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b flange_b annotation(
+        Placement(visible = true, transformation(origin = {50, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       test = omegaAngularVel.omega*10;
       tau = K*i;
       J*der(omegaOut) = tau - B*omegaOut;
-      L*der(i) = min(maxCurrent, u) - R*i - K*omegaOut;
+      L*der(i) = min(maxCurrent, u) - R*i - K*flange_b.phi;
 // Regelung auf die gewünschte Drehzahl
       u = k_p*(desiredSpeed - omegaOut) + k_i*integral_error;
 // Berechnung des Integralfehlers
-      der(integral_error) = desiredSpeed - omegaOut;
+      der(integral_error) = desiredSpeed - flange_b.phi;
     initial equation
-      omegaOut = 0;
+      flange_b.phi = 0;
       integral_error = 0;
       i = 0;
       annotation(
@@ -249,7 +249,7 @@ package DroneFlightControl
 
     model Auftrieb2
       //Parameter
-          //Variablen
+      //Variablen
       Modelica.Units.SI.AngularVelocity w_prop "Propeller angular velocity";
       Modelica.Units.SI.Force F_auf "Lift force";
       Modelica.Units.SI.Force F_prop "Propeller force";
@@ -297,9 +297,10 @@ package DroneFlightControl
   Modelica.Mechanics.Translational.Components.Fixed fixed annotation(
       Placement(visible = true, transformation(origin = {4, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   DroneFlightControl.propeller_env.Auftrieb2 auftrieb2 annotation(
-      Placement(visible = true, transformation(origin = {30, 14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {34, 14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-
+  connect(auftrieb2.flange_a, gleichstrommotor.flange_b) annotation(
+      Line(points = {{24, 14}, {-22, 14}}));
     annotation(
       Icon(coordinateSystem(grid = {1, 1})),
       experiment(StartTime = 0, StopTime = 200, Tolerance = 1e-06, Interval = 0.01));
