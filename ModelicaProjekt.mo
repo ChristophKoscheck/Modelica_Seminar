@@ -30,7 +30,52 @@ package ModelicaProjekt
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput y annotation(
       Placement(visible = true, transformation(origin = {102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+
+    class Propeller_Specs
+    
+     //Parameter
+      parameter Modelica.Units.SI.Diameter d = 0.3 "Diameter";
+      parameter Modelica.Units.SI.Area A_p = 0.13 "Area of the propeller";
+      parameter Real A_prop = 0.13 "Area of the propeller";
+      parameter Real r_prop = 0.2 "Radius of the propeller";
+      parameter Real d_prop = 0.4 "Diameter of the propeller";
+      parameter Real C_l = 0.006 "Lift coefficient";
+      parameter Real NoP = 4 "Number of propellers";
+      parameter Real c_w = 0.14 "Drag Coefficient";
+      
+    end Propeller_Specs;
+    
+    //Variablen
+    Modelica.Units.SI.AngularVelocity w_prop "Propeller angular velocity";
+    Modelica.Units.SI.Force F_auf "Lift force";
+    Modelica.Units.SI.Force F_prop "Propeller force";
+    Modelica.Units.SI.Torque T_prop "Propeller torque";
+    Modelica.Units.SI.Acceleration Acc_prop "acceleration per propeller";
+    Modelica.Units.SI.velocity V_prop "Velocity of System";
+    Modelica.Units.SI.Resistance F_w "Flow resistance";
+
+    class Drone_Specs
+      parameter Modelica.Units.SI.Mass Masse = 4 "System Mass";
+      parameter Modelica.Units.SI.Area A_drone = 0.5 "Dem wind ausgesetzte Oberfläche";
+    end Drone_Specs;
+
+    class Enviroment
+    parameter Modelica.Units.SI.Density p_air = 1.225 "Air density";
+    end Enviroment;
   equation
+      //First Equations
+      Rot_speed = der(flange_b.phi)"Rotaional Speed of Propeller rad/s";
+      T_prop = flange_b.tau "Torque of Engine";
+      //Use of first Equations
+      F_prop = T_prop/Propeller_Specs.r_prop - F_w "Acceleration Force of one propeller";
+      w_prop = Rot_speed*Propeller_Specs.r_prop*Modelica.Constants.R2D "Angular velocity of the propeller";
+      //Further use of Equations
+      Acc_prop = F_prop/Drone_Specs.Masse "Acceleration of one propeller";
+      der(V_prop) = Acc_prop "Acceleration of the system";
+      F_w = Drone_Specs.A_drone*Propeller_Specs.c_w*0.5*Enviroment.p_air*V_prop^2 "Air resistance";
+
+  
+  
   
   end Propeller;
   
