@@ -256,17 +256,17 @@ package Quadrocopter
     //Gehause gehause(position(start = 0));
     //Modelica-Blöcke
     Quadrocopter.Gehause gehause annotation(
-      Placement(visible = true, transformation(origin = {5, 3.5}, extent = {{-75, -37.5}, {75, 37.5}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {5, 5.5}, extent = {{-75, -37.5}, {75, 37.5}}, rotation = 0)));
     Quadrocopter.Motor motor annotation(
       Placement(visible = true, transformation(origin = {46, 73.5}, extent = {{-10, 12.5}, {10, -12.5}}, rotation = 180)));
     Quadrocopter.Motor motor1 annotation(
       Placement(visible = true, transformation(origin = {46.45, -56.7}, extent = {{10.2, -12.75}, {-10.2, 12.75}}, rotation = 0)));
     Quadrocopter.Rotor rotor2 annotation(
-      Placement(visible = true, transformation(origin = {-58.6667, -44.7333}, extent = {{-43.3333, 17.3333}, {43.3333, 43.3333}}, rotation = 90)));
+      Placement(visible = true, transformation(origin = {-76.6667, -46.7333}, extent = {{-43.3333, 17.3333}, {43.3333, 43.3333}}, rotation = 90)));
     Quadrocopter.Motor motor2 annotation(
       Placement(visible = true, transformation(origin = {-55, -58.15}, extent = {{-9.4, -11.75}, {9.4, 11.75}}, rotation = 0)));
     Quadrocopter.Rotor rotor3 annotation(
-      Placement(visible = true, transformation(origin = {-116.667, 58}, extent = {{-40, 16}, {40, 40}}, rotation = -90)));
+      Placement(visible = true, transformation(origin = {-128.667, 54}, extent = {{-40, 16}, {40, 40}}, rotation = -90)));
     Quadrocopter.Motor motor3 annotation(
       Placement(visible = true, transformation(origin = {-55.6, 72.8}, extent = {{-9.6, -12}, {9.6, 12}}, rotation = 0)));
     Quadrocopter.Steuerung steuerung(kp_h = 1.3) annotation(
@@ -276,9 +276,9 @@ package Quadrocopter
     Modelica.Blocks.Sources.Ramp ramp1(duration = 1, height = 200, startTime = 60) annotation(
       Placement(visible = true, transformation(origin = {-46, 118}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Quadrocopter.Rotor rotor annotation(
-      Placement(visible = true, transformation(origin = {61, 57}, extent = {{-41, 16.4}, {41, 41}}, rotation = -90)));
+      Placement(visible = true, transformation(origin = {103, 67}, extent = {{-41, 16.4}, {41, 41}}, rotation = -90)));
     Quadrocopter.Rotor rotor1 annotation(
-      Placement(visible = true, transformation(origin = {122.333, -45.0667}, extent = {{-44.3333, 17.7333}, {44.3333, 44.3333}}, rotation = 90)));
+      Placement(visible = true, transformation(origin = {140.333, -37.0667}, extent = {{-44.3333, 17.7333}, {44.3333, 44.3333}}, rotation = 90)));
   equation
 //Berechnung der Entnahme von elektrischer Energie aller Motoren mit Inverter an Batterie
     E_gesamt = motor.E_einzel + motor1.E_einzel + motor2.E_einzel + motor3.E_einzel;
@@ -288,25 +288,25 @@ package Quadrocopter
     connect(steuerung.X, ramp1.y) annotation(
       Line(points = {{8.6, 126.2}, {-15.8, 126.2}, {-15.8, 118}, {-35, 118}}, color = {0, 0, 127}));
     connect(rotor3.mechanisch, gehause.mechanisch3) annotation(
-      Line(points = {{-88, 54}, {-40, 54}, {-40, 22}}));
+      Line(points = {{-101, 49}, {61, 49}, {61, 5.5}}));
     connect(rotor.mechanisch, gehause.mechanisch) annotation(
-      Line(points = {{90, 52}, {41, 52}, {41, 20}}));
+      Line(points = {{132, 62}, {5, 62}}));
     connect(rotor1.mechanisch, gehause.mechanisch1) annotation(
-      Line(points = {{92, -40}, {40, -40}, {40, -17}, {41, -17}}));
+      Line(points = {{109, -32}, {20, -32}, {20, 4}, {-51, 4}}));
     connect(motor2.m_rot, rotor2.m_rot) annotation(
-      Line(points = {{-62, -57}, {-70, -57}, {-70, -45}, {-89, -45}}));
+      Line(points = {{-62, -57}, {-70, -57}, {-70, -47}, {-107, -47}}));
     connect(motor3.m_rot, rotor3.m_rot) annotation(
-      Line(points = {{-62, 74}, {-74, 74}, {-74, 58}, {-88, 58}}));
+      Line(points = {{-62, 74}, {-117.5, 74}, {-117.5, 54}, {-101, 54}}));
     connect(motor.m_rot, rotor.m_rot) annotation(
-      Line(points = {{54, 74}, {70, 74}, {70, 58}, {90, 58}}));
+      Line(points = {{54, 74}, {70, 74}, {70, 67}, {132, 67}}));
     connect(motor1.m_rot, rotor1.m_rot) annotation(
-      Line(points = {{54, -55}, {72, -55}, {72, -46}, {92, -46}}));
+      Line(points = {{54, -55}, {72, -55}, {72, -37}, {109, -37}}));
     connect(gehause.x_ist, steuerung.x_ist) annotation(
-      Line(points = {{70, -5}, {84, -5}, {84, 8}, {98, 8}, {98, 112}, {12, 112}, {12, 122}}, color = {0, 0, 127}));
+      Line(points = {{-29, 71}, {84, 71}, {84, 8}, {98, 8}, {98, 112}, {12, 112}, {12, 122}}, color = {0, 0, 127}));
     connect(gehause.y, steuerung.h_ist) annotation(
-      Line(points = {{-62, 21}, {-62, 48}, {16, 48}, {16, 122}}, color = {0, 0, 127}));
+      Line(points = {{-61, 45}, {-61, 48}, {16, 48}, {16, 122}}, color = {0, 0, 127}));
     connect(gehause.u, steuerung.Phi_ist) annotation(
-      Line(points = {{2, -26}, {20, -26}, {20, 122}}, color = {0, 0, 127}));
+      Line(points = {{-61, -28}, {20, -28}, {20, 122}}, color = {0, 0, 127}));
     connect(steuerung.omega_soll_vorne, motor.soll_v) annotation(
       Line(points = {{26, 134}, {46, 134}, {46, 82}}, color = {0, 0, 127}));
     connect(steuerung.omega_soll_vorne, motor1.soll_v) annotation(
@@ -316,7 +316,7 @@ package Quadrocopter
     connect(steuerung.omega_soll_hinten, motor2.soll_v) annotation(
       Line(points = {{26, 126}, {34, 126}, {34, 96}, {-54, 96}, {-54, -51}}, color = {0, 0, 127}));
     connect(gehause.mechanisch2, rotor2.mechanisch) annotation(
-      Line(points = {{-40, -18}, {-40, -40}, {-88, -40}}));
+      Line(points = {{7, -51}, {7, -42}, {-107, -42}}));
     annotation(
       experiment(StartTime = 0, StopTime = 1000, Tolerance = 1e-06, Interval = 1),
       Diagram(coordinateSystem(extent = {{-100, -100}, {100, 150}})),
