@@ -127,8 +127,8 @@ package Drone
     connector Spannung_Strom_Connector
       // Imports --------------------
       // Variables --------------------
-      Modelica.Units.SI.Power U "Spannung";
-      flow Modelica.Units.SI.Current I "Strom";
+      Modelica.Units.SI.Power U "Voltage";
+      flow Modelica.Units.SI.Current I "Current";
       // Annotation --------------------
       annotation(
         Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(fillColor = {121, 193, 66}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-3, 11}, extent = {{-189, 63}, {189, -63}}, textString = "U&I")}),
@@ -138,8 +138,8 @@ package Drone
     connector Weg_Kraft_Connector
       // Imports --------------------
       // Variables --------------------
-      Modelica.Units.SI.Length s "Weg";
-      flow Modelica.Units.SI.Force F "Kraft";
+      Modelica.Units.SI.Length s "Position";
+      flow Modelica.Units.SI.Force F "Force";
       // Annotation --------------------
       annotation(
         Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(fillColor = {200, 159, 34}, fillPattern = FillPattern.Solid, points = {{0, 100}, {0, 100}, {-100, 0}, {-80, -100}, {80, -100}, {100, 0}, {0, 100}}), Text(origin = {48, -23}, extent = {{-208, 59}, {110, -45}}, textString = "s&F")}),
@@ -184,15 +184,15 @@ package Drone
         Placement(visible = true, transformation(origin = {-86, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-15, 56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       
     // Constants --------------------
-      constant Real g = Modelica.Constants.g_n "Erdbeschleunigung";
+      constant Real g = Modelica.Constants.g_n "Earth acceleration";
     // Parameters --------------------
-      parameter Modelica.Units.SI.Mass mass = 4.310 "mass of drone";
+      parameter Modelica.Units.SI.Mass mass = 4.310 "Mass of drone";
     
     // Variables --------------------
-      Modelica.Units.SI.Velocity v_y "Geschwindigkeit in vertikaler Richtung (m/s)";
-      Modelica.Units.SI.Acceleration a_y "Beschleunigung in vertikaler Richtung (m/s^2)";
-      Modelica.Units.SI.Force F_y "Gesamtauftriebskraft in vertikaler Richtung (N)"; 
-      Modelica.Units.SI.Force F_g "Gewichtskraft (N)";
+      Modelica.Units.SI.Velocity v_y "Velocity in vertical direction (m/s)";
+      Modelica.Units.SI.Acceleration a_y "Acceleration in vertical direction (m/s^2)";
+      Modelica.Units.SI.Force F_y "Sum of all forces in vertical direction (N)"; 
+      Modelica.Units.SI.Force F_g "Gravitational force (N)";
     
     // Equations --------------------
      
@@ -238,7 +238,7 @@ package Drone
     //    Placement(visible = true, transformation(origin = {-96, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-96, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
     model DefPropeller
-      constant Real g = Modelica.Constants.g_n "Erdbeschleunigung";
+      constant Real g = Modelica.Constants.g_n "earth acceleration";
       Drone.Connectors.Winkel_Moment_Connector phi_M_Connector annotation(
         Placement(visible = true, transformation(origin = {-70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {1, -1}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Drone.Connectors.RealInput airDensity(unit = "kg/m3") annotation(
