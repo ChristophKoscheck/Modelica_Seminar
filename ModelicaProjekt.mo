@@ -43,6 +43,8 @@ package Drone
       Placement(visible = true, transformation(origin = {-48, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Drone.Propeller.DefPropeller defPropeller3 annotation(
       Placement(visible = true, transformation(origin = {-47, -65}, extent = {{-25, -25}, {25, 25}}, rotation = -90)));
+  Battery.DefBattery defBattery annotation(
+      Placement(visible = true, transformation(origin = {0, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(defHeightProfile.MeasHeightProfile, defSensor.MeasHeightProfile) annotation(
       Line(points = {{2, 94}, {20, 94}, {20, 69}, {0.5, 69}, {0.5, 55}, {-1, 55}}, color = {0, 0, 127}));
@@ -84,7 +86,27 @@ package Drone
       Line(points = {{-40, -66}, {-4, -66}, {-4, 0}}));
     connect(defPropeller0.s_F_Connector, defDrone.s_F_Connector0) annotation(
       Line(points = {{-66, 42}, {-32, 42}, {-32, 6}, {-4, 6}}));
-    // assume constant speed of 14m/s for 24321.41m = 1 737.24357s
+// assume constant speed of 14m/s for 24321.41m = 1 737.24357s
+    connect(defBattery.pin_pos, defEngine0.pin_pos) annotation(
+      Line(points = {{-2, -16}, {-72, -16}, {-72, 8}, {-64, 8}}, color = {0, 0, 255}));
+  connect(defBattery.pin_pos, defEngine3.pin_pos) annotation(
+      Line(points = {{-2, -16}, {-48, -16}, {-48, -40}}, color = {0, 0, 255}));
+  connect(defBattery.pin_pos, defEngine2.pin_pos) annotation(
+      Line(points = {{-2, -16}, {54, -16}, {54, -40}}, color = {0, 0, 255}));
+  connect(defBattery.pin_pos, defEngine1.pin_pos) annotation(
+      Line(points = {{-2, -16}, {54, -16}, {54, 8}, {66, 8}}, color = {0, 0, 255}));
+  connect(defBattery.pin_neg, defEngine1.pin_neg) annotation(
+      Line(points = {{2, -18}, {68, -18}, {68, 6}}, color = {0, 0, 255}));
+  connect(defBattery.pin_neg, defEngine2.pin_neg) annotation(
+      Line(points = {{2, -18}, {56, -18}, {56, -38}}, color = {0, 0, 255}));
+  connect(defBattery.pin_neg, defEngine3.pin_neg) annotation(
+      Line(points = {{2, -18}, {-46, -18}, {-46, -38}}, color = {0, 0, 255}));
+  connect(defBattery.pin_neg, defEngine0.pin_neg) annotation(
+      Line(points = {{2, -18}, {-62, -18}, {-62, 6}}, color = {0, 0, 255}));
+  connect(defBattery.pin_pos, defController.pin_pos) annotation(
+      Line(points = {{-2, -16}, {-8, -16}, {-8, 18}}, color = {0, 0, 255}));
+  connect(defBattery.pin_neg, defController.pin_neg) annotation(
+      Line(points = {{2, -18}, {-16, -18}, {-16, 16}, {-4, 16}}, color = {0, 0, 255}));
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -4},rotation = 180, extent = {{-110, 100}, {110, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
       experiment(StartTime = 0, StopTime = 1737.24, Tolerance = 1e-06, Interval = 0.03),
@@ -227,8 +249,8 @@ package Drone
       Modelica.Units.SI.AngularVelocity propOmega "propeller angular velocity";
       Real rpmProp(unit = "rpm");
       parameter Modelica.Units.SI.Length rProp = 0.203 "propeller radius";
-      parameter Real C_l = 0.38 "Lift coefficient";
-      parameter Real C_w = 0.03 "Drag coefficient";
+      parameter Real C_l = 0.18 "lift coefficient";
+      parameter Real C_w = 0.05 "drag coefficient";
       parameter Real NumProp = 1 "Number of propellers";
     Drone.Connectors.Weg_Kraft_Connector s_F_Connector annotation(
         Placement(visible = true, transformation(origin = {-14, -58}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {1, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -264,7 +286,7 @@ package Drone
   model Engine
     model DefEngine "Speed controlled DC PM drive with H-bridge from battery"
       //  extends Utilities.PartialControlledDCPM;
-      Modelica.Electrical.Machines.Examples.ControlledDCDrives.Utilities.LimitedPI speedController(Ti = driveData.Tiw, constantLimits = true, initType = Modelica.Blocks.Types.Init.InitialOutput, k = driveData.kpw, symmetricLimits = false, yMax = driveData.tauMax, yMin = 0) annotation(
+      Modelica.Electrical.Machines.Examples.ControlledDCDrives.Utilities.LimitedPI speedController(Ti = driveData.Tiw, constantLimits = true, initType = Modelica.Blocks.Types.Init.InitialOutput, k = driveData.kpw, symmetricLimits = false, yMin = 0) annotation(
         Placement(visible = true, transformation(origin = {-10, 48}, extent = {{-120, -20}, {-100, 0}}, rotation = 0)));
       Modelica.Blocks.Math.Gain tau2i(k = 1/driveData.kPhi) annotation(
         Placement(visible = true, transformation(origin = {-80, 38}, extent = {{10, -10}, {-10, 10}}, rotation = 180)));
@@ -274,17 +296,9 @@ package Drone
         Placement(visible = true, transformation(origin = {90, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-74, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Drone.Connectors.RealInput RefEngineSpeed annotation(
         Placement(visible = true, transformation(origin = {-200, 38}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-20, 55}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
-      Modelica.Blocks.Continuous.LimPID PID(Ti = Ti, controllerType = Modelica.Blocks.Types.SimpleController.PI, initType = Modelica.Blocks.Types.Init.InitialOutput, k = k, kFF = kPhi, withFeedForward = true, yMax = 1000) annotation(
-        Placement(visible = true, transformation(origin = {20, -22}, extent = {{-50, 50}, {-30, 70}}, rotation = 0)));
-      Modelica.Electrical.Analog.Basic.Ground ground annotation(
-        Placement(visible = true, transformation(origin = {2, -22}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-      Modelica.Electrical.Analog.Sources.SignalVoltage signalVoltage annotation(
-        Placement(visible = true, transformation(origin = {20, -22}, extent = {{20, 20}, {0, 40}}, rotation = 0)));
-      Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(
-        Placement(visible = true, transformation(origin = {40, -12}, extent = {{10, -10}, {-10, 10}}, rotation = 90)));
       parameter Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData dcpmData(Jr = 10e-3, Js = 10e-3, VaNominal = 23.1, wNominal = 1200*2*Modelica.Constants.pi/60) annotation(
         Placement(visible = true, transformation(origin = {78, 140}, extent = {{0, -60}, {20, -40}}, rotation = 0)));
-      Modelica.Electrical.Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm(IaNominal = dcpmData.IaNominal, Jr = dcpmData.Jr, Js = dcpmData.Js, La = dcpmData.La, Ra = dcpmData.Ra, TaNominal = dcpmData.TaNominal, TaOperational = 293.15, TaRef = dcpmData.TaRef, VaNominal = dcpmData.VaNominal, alpha20a = dcpmData.alpha20a, ia(fixed = true), phiMechanical(displayUnit = "rad", fixed = true), useSupport = false, wMechanical(displayUnit = "rad/s", fixed = true), wNominal = dcpmData.wNominal) annotation(
+      Modelica.Electrical.Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm(IaNominal = dcpmData.IaNominal, Jr (fixed = true)= dcpmData.Jr, Js = dcpmData.Js, La = dcpmData.La, Ra = dcpmData.Ra, TaNominal = dcpmData.TaNominal, TaOperational = 300.15, TaRef = dcpmData.TaRef, VaNominal = dcpmData.VaNominal, alpha20a = dcpmData.alpha20a, coreParameters = driveData.motorData.coreParameters, frictionParameters = driveData.motorData.frictionParameters, ia(fixed = true), phiMechanical(displayUnit = "rad", fixed = true), useSupport = false, wMechanical(displayUnit = "rad/s", fixed = true), wNominal = dcpmData.wNominal) annotation(
         Placement(visible = true, transformation(origin = {16, -20}, extent = {{0, -30}, {20, -10}}, rotation = 0)));
       parameter Modelica.Electrical.Machines.Examples.ControlledDCDrives.Utilities.DriveDataDCPM driveData(VBat = 23.1, fS = 4e3, motorData = dcpmData) annotation(
         Placement(visible = true, transformation(origin = {58, 138}, extent = {{20, -80}, {40, -60}}, rotation = 0)));
@@ -298,33 +312,47 @@ package Drone
       parameter Modelica.Units.SI.Resistance k = Ra*Ta/(2*Ts) "Current controller proportional gain";
       parameter Modelica.Units.SI.Time Ti = Ta "Current controller integral time constant";
       parameter Modelica.Units.SI.MagneticFlux kPhi = ViNominal/dcpmData.wNominal "Voltage constant";
+  Modelica.Blocks.Nonlinear.SlewRateLimiter slewRateLimiter(Rising = driveData.aMax, initType = Modelica.Blocks.Types.Init.InitialOutput)  annotation(
+        Placement(visible = true, transformation(origin = {-162, 38}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Machines.Examples.ControlledDCDrives.Utilities.LimitedPI currentController(KFF = driveData.kPhi, Ti = driveData.TiI, constantLimits = false, initType = Modelica.Blocks.Types.Init.InitialOutput, k = driveData.kpI, useFF = true) annotation(
+        Placement(visible = true, transformation(origin = {10, 48}, extent = {{-50, -20}, {-30, 0}}, rotation = 0)));
+  Modelica.Electrical.Machines.Examples.ControlledDCDrives.Utilities.DcdcInverter armatureInverter(Td = driveData.Td, Tmf = driveData.Tmf, VMax = driveData.VaMax, fS = driveData.fS) annotation(
+        Placement(visible = true, transformation(origin = {-6, 48}, extent = {{20, -20}, {40, 0}}, rotation = 0)));
+  Modelica.Electrical.Analog.Interfaces.NegativePin pin_neg annotation(
+        Placement(visible = true, transformation(origin = {16, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {16, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Analog.Interfaces.PositivePin pin_pos annotation(
+        Placement(visible = true, transformation(origin = {48, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-4, 9}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(speedSensor.w, speedController.u_m) annotation(
         Line(points = {{50, -81}, {50, -90}, {-126, -90}, {-126, 26}}, color = {0, 0, 127}));
-      connect(RefEngineSpeed, speedController.u) annotation(
-        Line(points = {{-200, 38}, {-132, 38}}, color = {0, 0, 127}));
-      connect(signalVoltage.p, currentSensor.p) annotation(
-        Line(points = {{40, 8}, {40, -2}}, color = {0, 0, 255}));
-      connect(signalVoltage.n, ground.p) annotation(
-        Line(points = {{20, 8}, {20, -22}, {12, -22}}, color = {0, 0, 255}));
-      connect(tau2i.y, PID.u_s) annotation(
-        Line(points = {{-69, 38}, {-32, 38}}, color = {0, 0, 127}));
-      connect(speedSensor.w, PID.u_ff) annotation(
-        Line(points = {{50, -80}, {50, -90}, {-14, -90}, {-14, 26}}, color = {0, 0, 127}));
-      connect(ground.p, dcpm.pin_an) annotation(
-        Line(points = {{12, -22}, {20, -22}, {20, -30}}, color = {0, 0, 255}));
-      connect(currentSensor.n, dcpm.pin_ap) annotation(
-        Line(points = {{40, -22}, {32, -22}, {32, -30}}, color = {0, 0, 255}));
       connect(speedController.y, tau2i.u) annotation(
         Line(points = {{-108, 38}, {-92, 38}}, color = {0, 0, 127}));
-      connect(PID.y, signalVoltage.v) annotation(
-        Line(points = {{-8, 38}, {30, 38}, {30, 20}}, color = {0, 0, 127}));
       connect(dcpm.flange, phi_M_Connector) annotation(
         Line(points = {{36, -40}, {90, -40}}));
       connect(dcpm.flange, speedSensor.flange) annotation(
         Line(points = {{36, -40}, {50, -40}, {50, -60}}));
-      connect(currentSensor.i, PID.u_m) annotation(
-        Line(points = {{52, -12}, {70, -12}, {70, -98}, {-20, -98}, {-20, 26}}, color = {0, 0, 127}));
+      connect(RefEngineSpeed, slewRateLimiter.u) annotation(
+        Line(points = {{-200, 38}, {-174, 38}}, color = {0, 0, 127}));
+      connect(slewRateLimiter.y, speedController.u) annotation(
+        Line(points = {{-151, 38}, {-132, 38}}, color = {0, 0, 127}));
+      connect(tau2i.y, currentController.u) annotation(
+        Line(points = {{-68, 38}, {-42, 38}}, color = {0, 0, 127}));
+      connect(armatureInverter.vDC, currentController.yMaxVar) annotation(
+        Line(points = {{14, 44}, {-18, 44}}, color = {0, 0, 127}));
+      connect(armatureInverter.iMot, currentController.u_m) annotation(
+        Line(points = {{14, 32}, {0, 32}, {0, 10}, {-36, 10}, {-36, 26}}, color = {0, 0, 127}));
+      connect(currentController.y, armatureInverter.vRef) annotation(
+        Line(points = {{-18, 38}, {12, 38}}, color = {0, 0, 127}));
+      connect(armatureInverter.pin_nMot, dcpm.pin_an) annotation(
+        Line(points = {{18, 28}, {20, 28}, {20, -30}}, color = {0, 0, 255}));
+      connect(armatureInverter.pin_pMot, dcpm.pin_ap) annotation(
+        Line(points = {{30, 28}, {32, 28}, {32, -30}}, color = {0, 0, 255}));
+      connect(speedSensor.w, currentController.feedForward) annotation(
+        Line(points = {{50, -80}, {50, -90}, {-30, -90}, {-30, 26}}, color = {0, 0, 127}));
+  connect(pin_pos, armatureInverter.pin_pBat) annotation(
+        Line(points = {{48, 84}, {48, 60}, {30, 60}, {30, 48}}, color = {0, 0, 255}));
+  connect(pin_neg, armatureInverter.pin_nBat) annotation(
+        Line(points = {{16, 84}, {18, 84}, {18, 48}}, color = {0, 0, 255}));
       annotation(
         experiment(StopTime = 150, Interval = 0.3, StartTime = 0, Tolerance = 1e-06),
         Documentation(info = "<html>
@@ -379,21 +407,30 @@ package Drone
       Placement(visible = true, transformation(origin = {-82, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 
     model DefBattery
-      // Imports --------------------
+  // Imports --------------------
       // Connectors --------------------
       // Parameters --------------------
       // Variables --------------------
-      Modelica.Units.SI.ElectricCurrent I "Fliessender Strom";
-      Modelica.Units.SI.Voltage U "Ausgegebene Spannung";
       // Equations --------------------
-      Drone.Connectors.Spannung_Strom_Connector U_I_Connector annotation(
-        Placement(visible = true, transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-3, 69}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground annotation(
+        Placement(visible = true, transformation(origin = {30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Analog.Interfaces.PositivePin pin_pos annotation(
+        Placement(visible = true, transformation(origin = {-56, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-20, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Analog.Interfaces.NegativePin pin_neg annotation(
+        Placement(visible = true, transformation(origin = {54, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {23, 59}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.Electrical.Batteries.ParameterRecords.CellData cellData(OCVmax = 3.8, OCVmin = 2.3, Qnom = 15408, Ri = cellData.OCVmax/500)  annotation(
+        Placement(visible = true, transformation(origin = {90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Batteries.BatteryStacks.CellStack cellStack(Np = 3, Ns = 8, SOC(fixed = true, start = 0.98), cellData = cellData)  annotation(
+        Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
-      U_I_Connector.U = U;
-      U_I_Connector.I = I;
-      
 // --------------------
 // Annotation --------------------
+      connect(cellStack.p, pin_pos) annotation(
+        Line(points = {{-10, 0}, {-56, 0}}, color = {0, 0, 255}));
+  connect(cellStack.n, pin_neg) annotation(
+        Line(points = {{10, 0}, {54, 0}}, color = {0, 0, 255}));
+  connect(cellStack.n, ground.p) annotation(
+        Line(points = {{10, 0}, {30, 0}, {30, -20}}, color = {0, 0, 255}));
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0.5, 0}, rotation = 180, extent = {{-99, 100}, {100, -100}}, fileName = "modelica://Drone/pictures/power-bank_5735222.png")}),
         experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-6, Interval = 0.04));
@@ -425,6 +462,12 @@ package Drone
       Real rpmRef(unit = "rpm");
   Modelica.Blocks.Continuous.LimPID pid(Td = Ti_d, Ti = Ti_c, k = k_c, withFeedForward = true, yMax = 837.76, yMin = 0)  annotation(
         Placement(visible = true, transformation(origin = {0, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Analog.Basic.Resistor resistor(R (displayUnit = "mOhm")= 6.000000000000002)  annotation(
+        Placement(visible = true, transformation(origin = {2, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Analog.Interfaces.PositivePin pin_pos annotation(
+        Placement(visible = true, transformation(origin = {-58, -74}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-74, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Electrical.Analog.Interfaces.NegativePin pin_neg annotation(
+        Placement(visible = true, transformation(origin = {46, -76}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-42, -19}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
   connect(DroneHeightOut, limitedPI.u_m) annotation(
         Line(points = {{46, 44}, {46, -40}, {-6, -40}, {-6, -12}}, color = {0, 0, 127}));
@@ -442,8 +485,12 @@ package Drone
         Line(points = {{66, 90}, {66, -50}, {-30, -50}, {-30, 36}, {-12, 36}}, color = {0, 0, 127}));
   connect(pid.y, RefEngineSpeed) annotation(
         Line(points = {{12, 36}, {30, 36}, {30, 0}, {90, 0}}, color = {0, 0, 127}));
+  connect(resistor.p, pin_pos) annotation(
+        Line(points = {{-8, -70}, {-58, -70}, {-58, -74}}, color = {0, 0, 255}));
+  connect(resistor.n, pin_neg) annotation(
+        Line(points = {{12, -70}, {46, -70}, {46, -76}}, color = {0, 0, 255}));
       annotation(
-        Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/motherboard_2656219.png")}),
+        Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {1, 0},rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/motherboard_2656219.png")}),
         experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-6, Interval = 0.002),
         Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
     end DefController;
@@ -515,7 +562,7 @@ package Drone
     end DefHeightProfile;
 
     model DefAir
-      parameter Real airDensityVal(unit = "kg/m3") = 1.225;
+      parameter Real airDensityVal(unit = "kg/m3") = 0.93;
       Connectors.RealOutput airDensity annotation(
         Placement(visible = true, transformation(origin = {2, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {3, -17}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
