@@ -406,10 +406,10 @@ package Drone
 
     model DefBattery
   // Imports --------------------
-      // Connectors --------------------
-      // Parameters --------------------
-      // Variables --------------------
-      // Equations --------------------
+    // Connectors --------------------
+    // Parameters --------------------
+    // Variables --------------------
+    // Equations --------------------
       Modelica.Electrical.Analog.Basic.Ground ground annotation(
         Placement(visible = true, transformation(origin = {30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Electrical.Analog.Interfaces.PositivePin pin_pos annotation(
@@ -490,10 +490,6 @@ package Drone
   end Controller;
 
   model Sensor
-    Modelica.Blocks.Continuous.Integrator integrator annotation(
-      Placement(visible = true, transformation(origin = {-46, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Interfaces.RealInput Angular_Velocity_input annotation(
-      Placement(visible = true, transformation(origin = {-104, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-88, -6}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
 
     model DefSensor
       Drone.Connectors.RealInput MeasHeightProfile annotation(
