@@ -86,7 +86,7 @@ package Drone
       Line(points = {{-40, -66}, {-4, -66}, {-4, 0}}));
     connect(defPropeller0.s_F_Connector, defDrone.s_F_Connector0) annotation(
       Line(points = {{-66, 42}, {-32, 42}, {-32, 6}, {-4, 6}}));
-// assume constant speed of 14m/s for 24321.41m = 1 737.24357s
+// assume constant speed of 14m/s for 24321.41m = 1737.24357s
     connect(defBattery.pin_pos, defEngine0.pin_pos) annotation(
       Line(points = {{-2, -16}, {-72, -16}, {-72, 8}, {-64, 8}}, color = {0, 0, 255}));
   connect(defBattery.pin_pos, defEngine3.pin_pos) annotation(
