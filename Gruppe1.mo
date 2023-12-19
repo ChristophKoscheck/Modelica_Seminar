@@ -5,14 +5,14 @@ package Drone
     class Contact "Contact"
       extends Modelica.Icons.Contact;
       annotation(
-        Documentation(info = "<html><head></head><body><dl><dt><!--StartFragment--><p>The Modelica DroneSim Library (this Modelica package) is developed by master students from Hochschule Pforzheim in their system engineering program:</p>
+        Documentation(info = "<html><head></head><body><dl><dt><!--StartFragment--><p><font size=\"4\">The <b><font color=\"#2c3e50\">Modelica Drone Library</font></b> (this Modelica package) is developed by master students from Hochschule Pforzheim in their system engineering program:</font></p>
   <ul>
-  <li>Christoph Koscheck</li>
-  <li>Alexander Leitz</li>
-  <li>Paul Smidt</li>
-  </ul>
+  <li><font size=\"4\"><b><font color=\"#2c3e50\">Christoph Koscheck</font></b> [koscheck@hs-pforzheim.de]</font></li>
+  <li><font size=\"4\"><b><font color=\"#2c3e50\">Alexander Leitz</font></b> [leitzale@hs-pforzheim.de]</font></li>
+  <li><font size=\"4\"><b><font color=\"#2c3e50\">Paul Smidt</font></b> [smidtpau@hs-pforzheim.de]</font></li>
+  </ul><div><font size=\"4\">This project is also available on <b><font color=\"#2c3e50\">GitHub</font></b>:</font></div><div><a href=\"https://github.com/ChristophKoscheck/Modelica_Seminar\"><font size=\"4\">https://github.com/ChristophKoscheck/Modelica_Seminar</font></a></div><div><br></div>
   
-  </body></html>"));
+  </dt></dl></body></html>"));
     end Contact;annotation(
       Documentation);
   end UserGuide;
@@ -118,7 +118,7 @@ package Drone
 // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -4}, rotation = 180, extent = {{-110, 100}, {110, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
-        experiment(StartTime = 0, StopTime = 1737.24, Tolerance = 1e-06, Interval = 0.03),
+        experiment(StartTime = 0, StopTime = 1737.24, Tolerance = 1e-06, Interval = 0.01),
         Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -6}, rotation = 180, extent = {{-112, 106}, {112, -106}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
         Documentation);
     end DefDroneSim;annotation(
@@ -207,8 +207,8 @@ package Drone
       F_y = s_F_Connector0.F + s_F_Connector1.F + s_F_Connector2.F + s_F_Connector3.F;
 //Ground collision prevention --------------------
       when DroneHeightOut < 0 then
-        reinit(DroneHeightOut, 0.015);
-        reinit(v_y, 0.01);
+        reinit(DroneHeightOut, 0.005);
+        reinit(v_y, 0.005);
       end when;
 // --------------------
 // Annotation --------------------
@@ -230,20 +230,20 @@ package Drone
 <!--------------------->
 <!--------------------->
 <table>
-	<thead>
-		<tr>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">mass</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> total drone mass</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">8.31kg</span></span></td>
-		</tr>
-	</tbody>
+ <thead>
+  <tr>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">mass</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> total drone mass</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">8.31kg</span></span></td>
+  </tr>
+ </tbody>
 </table>
 <!--End Table Paramters -->
 <!------------------------>
@@ -742,5 +742,11 @@ package Drone
     uses(Modelica(version = "4.0.0")),
     Documentation(info = "<html>
 <img src=\"modelica://Drone.ressources/Postervorlage-01.png\" style=\"width:100.0%\"> </img>
-</html>", __OpenModelica_infoHeader = "<html><head></head><body><br></body></html>"));
+</html>", __OpenModelica_infoHeader = "<html><head></head><body><h1><span style=\"color:#2980b9\"><span style=\"font-size:36px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Modelica Drone Documentation</strong></span></span></span></h1>
+
+<hr>
+<p><span style=\"color:#2c3e50\"><span style=\"font-family: Verdana, Geneva, sans-serif;\"><strong><font size=\"5\">Modelica Seminar</font><span style=\"font-size: 16px;\"> </span><font size=\"5\">|&nbsp;</font></strong></span><strong><font size=\"5\">WS23/24 |</font>&nbsp;</strong><span style=\"font-family: Verdana, Geneva, sans-serif;\"><strong><font size=\"5\">MMS 1</font></strong></span></span></p>
+
+<p><span style=\"color:#2c3e50\"><span style=\"font-size:16px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Christoph Koscheck // Alexander Leitz //&nbsp;</strong></span><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Paul Smidt</strong></span></span></span></p>
+<hr></body></html>"));
 end Drone;
