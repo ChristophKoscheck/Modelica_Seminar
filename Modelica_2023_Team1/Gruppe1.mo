@@ -15,9 +15,9 @@ package Drone
   </dt></dl></body></html>"));
     end Contact;
     annotation(
-      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\" face=\"Verdana\"><strong style=\"color: rgb(41, 128, 185);\">Introduction</strong><br>
 
-</font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">This is a user guide to help the user understand and use the \"Drone\" library.</font></p><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">It also includes the contact information of the creators.</font></p>
+</font><p><font size=\"4\" face=\"Verdana\">The aim of this library is to enable the user to test different <b>configurations</b> of a drone with which a <b>contour flight</b> is to be carried out. For this purpose, important drone parameters can be <b>parameterized</b> independently, thus providing information on a functioning control system, sufficient battery capacity or required rotor size at high altitudes.</font></p><p><font size=\"4\" face=\"Verdana\">The models are <b>subdivided</b> according to <b>components</b> and can be exchanged in <b>DefDroneSim</b> depending on the model to be examined.&nbsp;</font><span style=\"font-family: Verdana; font-size: large;\">Models with the prefix </span><i style=\"font-family: Verdana;\">Def</i><span style=\"font-family: Verdana; font-size: large;\"> represent the documented default configuration.</span></p><p><font size=\"4\" face=\"Verdana\">The <b>UserGuide</b> also includes the contact information of the creators.</font></p>
 
 </body></html>"));
   end UserGuide;
@@ -58,7 +58,7 @@ package Drone
         Placement(visible = true, transformation(origin = {0, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Equations --------------------
     equation
-// Connectors --------------------
+      // Connectors --------------------
       connect(defHeightProfile.MeasHeightProfile, defSensor.MeasHeightProfile) annotation(
         Line(points = {{2, 94}, {20, 94}, {20, 69}, {0.5, 69}, {0.5, 55}, {-1, 55}}, color = {0, 0, 127}));
       connect(defSensor.MeasHeightProfileOut, defController.MeasHeightProfileOut) annotation(
@@ -99,7 +99,6 @@ package Drone
         Line(points = {{-40, -66}, {-4, -66}, {-4, 0}}));
       connect(defPropeller0.s_F_Connector, defDrone.s_F_Connector0) annotation(
         Line(points = {{-66, 42}, {-32, 42}, {-32, 6}, {-4, 6}}));
-// assume constant speed of 14m/s for 24321.41m = 1737.24357s
       connect(defBattery.pin_pos, defEngine0.pin_pos) annotation(
         Line(points = {{-2, -16}, {-72, -16}, {-72, 8}, {-64, 8}}, color = {0, 0, 255}));
       connect(defBattery.pin_pos, defEngine3.pin_pos) annotation(
@@ -120,12 +119,12 @@ package Drone
         Line(points = {{-2, -16}, {-8, -16}, {-8, 18}}, color = {0, 0, 255}));
       connect(defBattery.pin_neg, defController.pin_neg) annotation(
         Line(points = {{2, -18}, {-16, -18}, {-16, 16}, {-4, 16}}, color = {0, 0, 255}));
-// Annotation --------------------
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -4}, rotation = 180, extent = {{-110, 100}, {110, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
         experiment(StartTime = 0, StopTime = 1737.24, Tolerance = 1e-06, Interval = 0.01),
         Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -6}, rotation = 180, extent = {{-112, 106}, {112, -106}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
-        Documentation);
+        Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The provided Model \"DefDroneSim\" representing a example simulation of a drone, flying over the rocky mountains within 28 minutes. T</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">he desired distance between the drone and the ground is 20 meters.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The model includes following components:</span></span></p><ul style=\"font-family: Verdana, Geneva, sans-serif;\"><li><font size=\"4\">DefBody</font></li><li><font size=\"4\">DefPropeller</font></li><li><font size=\"4\">DefEngine</font></li><li><font size=\"4\">DefBatterie</font></li><li><font size=\"4\">DefController</font></li><li><font size=\"4\">DefSensor</font></li><li><font size=\"4\">DefHeightProfile</font></li><li><font size=\"4\">DefAir</font></li></ul><blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\"><p></p></blockquote><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Simulation</span></strong></span></h1><font size=\"4\"><div>The simulation assumes a cosnate horizontal speed of 14m/s, which leads to a simulation time of 1737.24s for the flown distance of 24321.41m.</div>In this example, the battery has a remaining capacity of 5.7% at the end of the simulation</font></body></html>"));
     end DefDroneSim;
     annotation(
       Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
@@ -143,7 +142,7 @@ package Drone
       // Annotation --------------------
       annotation(
         Icon(graphics = {Ellipse(origin = {-1, 4}, fillColor = {37, 150, 225}, fillPattern = FillPattern.Solid, lineThickness = 1.5, extent = {{99, 94}, {-97, -102}})}, coordinateSystem(initialScale = 0.1, extent = {{-100, -100}, {100, 100}})),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The \"Winke_Moment_Connector\" model represents&nbsp;</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">a connector for 1D rotational mechanical systems.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>phi</code>: Absolute rotation angle of the flange in [rad].</font></li><li><font size=\"4\"><code>tau</code>:&nbsp;Cut-torque in the flange in [Nm].</font></li></ul></body></html>"));
+        Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The \"Winke_Moment_Connector\" model represents&nbsp;</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">a connector for 1D rotational mechanical systems.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>phi</code>: Absolute rotation angle of the flange in [rad].</font></li><li><font size=\"4\"><code>tau</code>:&nbsp;Cut-torque in the flange in [Nm].</font></li></ul></body></html>"));
     end Winkel_Moment_Connector;
 
     connector Weg_Kraft_Connector
@@ -171,7 +170,7 @@ package Drone
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0, 1}, extent = {{100, -99}, {-100, 99}}, fileName = "modelica://Drone/pictures/power-cable_5770130.png")}),
       Diagram,
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Connectors\" package contains the connectors used to connect the individual components of the library</font></p>
 
@@ -203,25 +202,26 @@ package Drone
       Modelica.Units.SI.Force F_g "Gravitational force (N)";
       // Equations --------------------
     equation
-//Connectors --------------------
+      //Connectors --------------------
       s_F_Connector0.s = s_F_Connector1.s;
       s_F_Connector1.s = s_F_Connector2.s;
       s_F_Connector2.s = s_F_Connector3.s;
       DroneHeightOut = s_F_Connector0.s;
-// Calculation of velocity, acceleration and position --------------------
+      // --------------------
+      // Calculation of velocity, acceleration and position --------------------
       der(DroneHeightOut) = v_y;
       der(v_y) = a_y;
-      F_g = mass*g;
-      mass*a_y = F_y - F_g;
-//Lift Force summary --------------------
+      F_g = mass*g "minimum thrust the propellers must deliver to achieve hovering flight";
+      mass*a_y = F_y - F_g "calculate lift force";
+      //Lift Force summary --------------------
       F_y = s_F_Connector0.F + s_F_Connector1.F + s_F_Connector2.F + s_F_Connector3.F;
-//Ground collision prevention --------------------
+      
+      //Ground substitute --------------------
       when DroneHeightOut < 0 then
-        reinit(DroneHeightOut, 0.005);
+        reinit(DroneHeightOut, 0.005) "avoids falling through the ground";
         reinit(v_y, 0.005);
       end when;
-// --------------------
-// Annotation --------------------
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {-1, 0}, extent = {{99, -98}, {-98, 98}}, fileName = "modelica://Drone/pictures/food_12725960.png")}),
         Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
@@ -281,7 +281,7 @@ package Drone
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {-1, -0.5}, extent = {{100, -99}, {-98, 100}}, fileName = "modelica://Drone/pictures/food_12725960.png")}),
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.02),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Body\" package contains the basic body of a drone which includes the technical information of the drone and calculates the drone movement.</font></p>
 
@@ -313,15 +313,15 @@ package Drone
       Real rpmProp(unit = "rpm");
       // Equations --------------------
     equation
-//Lift force and RPM of the Propeller
-      propOmega = der(phi_M_Connector.phi);
-      AProp = Modelica.Constants.pi*rProp^2;
-      F_lp = 0.5*airDensity*((rProp*propOmega)^2)*AProp*C_l;
-      F_l = F_lp*NumProp;
-      phi_M_Connector.tau = rProp*0.5*C_w*airDensity*AProp*(rProp*propOmega)^2;
-      rpmProp = Modelica.Units.Conversions.to_rpm(propOmega);
-      0 = s_F_Connector.F + F_l;
-// Annotation --------------------
+      //Lift force and RPM of the Propeller
+      propOmega = der(phi_M_Connector.phi) "derive angular velocity of engine";
+      AProp = Modelica.Constants.pi*rProp^2 "calculate propeller area";
+      F_lp = 0.5*airDensity*((rProp*propOmega)^2)*AProp*C_l "calculate lift force by propeller";
+      F_l = F_lp*NumProp "can be used for simple simulations to calculate sum of lift force without simulating multiple propellers";
+      phi_M_Connector.tau = rProp*0.5*C_w*airDensity*AProp*(rProp*propOmega)^2 "counter torque of the propeller";
+      rpmProp = Modelica.Units.Conversions.to_rpm(propOmega) "used for a more intuitive understanding of the results";
+      0 = s_F_Connector.F + F_l "sum of forces must be zero";
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(extent = {{-100, 100}, {-100, 100}}), Bitmap(origin = {-0.5, -1}, extent = {{-98, 99}, {99, -98}}, fileName = "modelica://Drone/pictures/propeller_6275206.png")}),
         Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
@@ -361,12 +361,12 @@ package Drone
   <tr>
    <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">C<sub>l</sub></span></span></td>
    <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> Lift coefficient</span></span></td>
-   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.34</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.28</span></span></td>
   </tr>
   <tr>
    <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">C<sub>w</sub></span></span></td>
    <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Drag coefficient</span></span></td>
-   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.05</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.09</span></span></td>
   </tr>
   <tr>
    <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">NumProp</span></span></td>
@@ -464,7 +464,7 @@ package Drone
         Placement(visible = true, transformation(origin = {-6, 48}, extent = {{20, -20}, {40, 0}}, rotation = 0)));
       // Equations --------------------
     equation
-// Connectors --------------------
+      // Connectors --------------------
       connect(speedSensor.w, speedController.u_m) annotation(
         Line(points = {{50, -81}, {50, -90}, {-126, -90}, {-126, 26}}, color = {0, 0, 127}));
       connect(speedController.y, tau2i.u) annotation(
@@ -495,11 +495,10 @@ package Drone
         Line(points = {{48, 84}, {48, 60}, {30, 60}, {30, 48}}, color = {0, 0, 255}));
       connect(pin_neg, armatureInverter.pin_nBat) annotation(
         Line(points = {{16, 84}, {18, 84}, {18, 48}}, color = {0, 0, 255}));
-// Annotation --------------------
+      // Annotation --------------------
       annotation(
         experiment(StopTime = 150, Interval = 0.3, StartTime = 0, Tolerance = 1e-06),
-        Documentation(info = "<html>
-<head></head>
+        Documentation(info = "<html><head></head>
 <body>
   <font size=\"6\">
     <strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">
@@ -509,35 +508,14 @@ package Drone
   </font>
   <p>
     <!--StartFragment-->
-    <font size=\"4\">
-      <span style=\"font-family: 'Segoe WPC', 'Segoe UI', sans-serif; font-variant-ligatures: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255);\">
+    
+      <font face=\"Verdana\"><span style=\"font-family:Verdana,Geneva,sans-serif; background-color: rgb(255, 255, 255);\"><font size=\"4\">
         This Modelica model represents a speed-controlled DC PM drive utilizing an H-bridge configuration from a battery. It simulates the behavior of an electrical machine, specifically a drone motor, by managing various parameters and control mechanisms.
-      </span>
-      &nbsp;
-    </font>
-  </p>
-
+      </font></span><font size=\"4\">&nbsp;</font> </font><font size=\"4\"><font face=\"Verdana\">&nbsp;</font></font></p><p><font face=\"Verdana\" size=\"4\">The machine receives the speed from the controller and the voltage/current from the battery. The machine is speed-controlled, with a lower-level current controller.</font><font size=\"4\"><font face=\"Verdana\">&nbsp; &nbsp;</font>&nbsp;&nbsp;</font></p><hr>
+  <h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Parameters</span></strong></span></h1><div><font size=\"4\">The parameters of the default drone motor are:</font></div><div><!--StartFragment--><font size=\"4\"><br></font><table style=\"font-family: 'MS Shell Dlg 2';\"><tbody><tr><td><font size=\"4\">stator's moment of inertia</font></td><td><font size=\"4\">0.01</font></td><td><font size=\"4\">kg.m2</font></td></tr><tr><td><font size=\"4\">rotor's moment of inertia</font></td><td><font size=\"4\">0.01</font></td><td><font size=\"4\">kg.m2</font></td></tr><tr><td><font size=\"4\">nominal armature voltage</font></td><td><font size=\"4\">23.1</font></td><td><font size=\"4\">V</font></td></tr><tr><td><font size=\"4\">nominal armature current</font></td><td><font size=\"4\">100</font></td><td><font size=\"4\">A</font></td></tr><tr><td><font size=\"4\">nominal speed</font></td><td><font size=\"4\">1800</font></td><td><font size=\"4\">rpm</font></td></tr><tr><td><font size=\"4\">efficiency</font></td><td><font size=\"4\">95.0</font></td><td><font size=\"4\">%</font></td></tr><tr><td><font size=\"4\">armature resistance</font></td><td><font size=\"4\">154.2</font></td><td><font size=\"4\">mOhm at reference temperature</font></td></tr><tr><td><font size=\"4\">reference temperature TaRef</font></td><td><font size=\"4\">20</font></td><td><font size=\"4\">°C</font></td></tr><tr><td><font size=\"4\">temperature coefficient alpha20a&nbsp;</font></td><td><font size=\"4\">0</font></td><td><font size=\"4\">1/K</font></td></tr><tr><td><font size=\"4\">armature inductance</font></td><td><font size=\"4\">9.05</font></td><td><font size=\"4\">mH</font></td></tr><tr><td><font size=\"4\">armature nominal temperature TaNominal</font></td><td><font size=\"4\">20</font></td><td><font size=\"4\">°C</font></td></tr><tr><td><font size=\"4\">armature operational temperature TaOperational</font></td><td><font size=\"4\">20</font></td><td><font size=\"4\">°C</font></td></tr></tbody></table><span style=\"font-family: 'MS Shell Dlg 2';\"><font size=\"4\">Armature resistance resp. inductance include resistance resp. inductance of commutating pole winding and compensation winding, if present.</font></span><!--EndFragment--></div><div></div><h1>
   <hr>
-  <h1>
-    <span style=\"color:#2980b9\">
-      <strong>
-        <span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span>
-      </strong>
-    </span>
-  </h1>
-  <font size=\"4\">
-    <strong>Parameters:</strong>
-  </font>
-  <!-- Include specific information about the parameters and their significance in the model -->
-
-  <hr>
-  <h1>
-    <span style=\"color:#2980b9\">
-      <strong>
-        <span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span>
-      </strong>
-    </span>
-  </h1>
+  
+  </h1><div><strong style=\"color: rgb(41, 128, 185);\"><span style=\"font-family:Verdana,Geneva,sans-serif\"><font size=\"6\">Equations</font></span></strong></div>
   <div>
     <p>
       <font size=\"4\">
@@ -546,8 +524,8 @@ package Drone
     </p>
   </div>
   <!-- You might want to add more information regarding the equations specific to the electrical machine if available -->
-</body>
-</html>"),
+
+</body></html>"),
         Diagram(coordinateSystem(extent = {{-200, -100}, {100, 100}})),
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/electric-motor_5770153.png")}));
     end DefEngine;
@@ -557,7 +535,7 @@ package Drone
       Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/electric-motor_5770153.png")}),
       Diagram,
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-6, Interval = 0.02),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Engine\" package contains models for engines that can be used to power the drones propellers.</font></p>
 
@@ -581,15 +559,14 @@ package Drone
         Placement(visible = true, transformation(origin = {90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Equations --------------------
     equation
-// --------------------
-// Connectors --------------------
+      // Connectors --------------------
       connect(cellStack.p, pin_pos) annotation(
         Line(points = {{-10, 0}, {-56, 0}}, color = {0, 0, 255}));
       connect(cellStack.n, pin_neg) annotation(
         Line(points = {{10, 0}, {54, 0}}, color = {0, 0, 255}));
       connect(cellStack.n, ground.p) annotation(
         Line(points = {{10, 0}, {30, 0}, {30, -20}}, color = {0, 0, 255}));
-// Annotation --------------------
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0.5, 0}, rotation = 180, extent = {{-99, 100}, {100, -100}}, fileName = "modelica://Drone/pictures/power-bank_5735222.png")}),
         experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-6, Interval = 0.04),
@@ -670,10 +647,10 @@ package Drone
 
     // Equations --------------------
   equation
-// Annotation --------------------
+    // Annotation --------------------
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0.5, 0}, rotation = 180, extent = {{-99, 100}, {100, -100}}, fileName = "modelica://Drone/pictures/power-bank_5735222.png")}),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Battery\" package contains battery models that can be used to power the drone.</font></p>
 
@@ -695,23 +672,24 @@ package Drone
       Modelica.Electrical.Analog.Interfaces.NegativePin pin_neg annotation(
         Placement(visible = true, transformation(origin = {70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-42, -19}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Blocks --------------------
-      Modelica.Blocks.Continuous.LimPID pid(Td = Ti_d, Ti = Ti_c, k = k_c, withFeedForward = true, yMax = 900, yMin = 0) annotation(
+      Modelica.Blocks.Continuous.LimPID pid(Td = Ti_d, Ti = Ti_c, k = k_c, withFeedForward = false, yMax = 900, yMin = 0) annotation(
         Placement(visible = true, transformation(origin = {0, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Electrical.Analog.Basic.Resistor resistor(R(displayUnit = "Ohm") = 10, T_ref = 313.15) annotation(
         Placement(visible = true, transformation(origin = {2, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Parameters --------------------
-      parameter Real k_c = 2;
-      parameter Real Ti_c = 10;
-      parameter Real Ti_d = 0.8;
+      // define gains as parameters to quickly make adjustements directly from the Simulation-UI
+      parameter Real k_c = 2 "proportional gain of PID controller";
+      parameter Real Ti_c = 10 "proportional gain of PID controller";
+      parameter Real Ti_d = 0.8 "proportional gain of PID controller";
       // Variables --------------------
-      Real rpmRef(unit = "rpm");
+      Real rpmRef(unit = "rpm") "used for a more intuitive understanding of the results";
       // Equations --------------------
     equation
-// Connectors --------------------
+      // Connectors --------------------
       connect(DroneHeightOut, pid.u_m) annotation(
         Line(points = {{44, 90}, {44, 18}, {0, 18}, {0, 24}}, color = {0, 0, 127}));
       connect(MeasHeightProfileOut, pid.u_ff) annotation(
-        Line(points = {{66, 90}, {66, 18}, {6, 18}, {6, 24}}, color = {0, 0, 127}));
+        Line(points = {{66, 90}, {66, 10}, {6, 10}, {6, 24}}, color = {0, 0, 127}));
       connect(MeasHeightProfileOut, pid.u_s) annotation(
         Line(points = {{66, 90}, {66, -50}, {-30, -50}, {-30, 36}, {-12, 36}}, color = {0, 0, 127}));
       connect(pid.y, RefEngineSpeed) annotation(
@@ -720,9 +698,9 @@ package Drone
         Line(points = {{-8, -70}, {-50, -70}}, color = {0, 0, 255}));
       connect(resistor.n, pin_neg) annotation(
         Line(points = {{12, -70}, {70, -70}}, color = {0, 0, 255}));
-// Equation rad/s to rpm --------------------
-      rpmRef = Modelica.Units.Conversions.to_rpm(RefEngineSpeed);
-// Annotation --------------------
+      // Conversion rad/s to rpm --------------------
+      rpmRef = Modelica.Units.Conversions.to_rpm(RefEngineSpeed) "unit conversion from rad/s to rpm" ;
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {1, 0}, rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/motherboard_2656219.png")}),
         experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-6, Interval = 0.002),
@@ -760,7 +738,7 @@ package Drone
 
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/motherboard_2656219.png")}),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Controller\" package contains models for controllers that can be used to regulate the power supply, speed and height of the drones engine.</font></p>
 
@@ -780,13 +758,14 @@ package Drone
       Drone.Connectors.RealOutput DroneHeightOut annotation(
         Placement(visible = true, transformation(origin = {30, -84}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {29, -87}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       // Blocks --------------------
+      // add ramped offset to measured height to define desired flight height
       Modelica.Blocks.Math.Add add annotation(
         Placement(visible = true, transformation(origin = {10, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Sources.Ramp ramp(duration = 5, height = 20, startTime = 1) annotation(
         Placement(visible = true, transformation(origin = {-60, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Equations --------------------
     equation
-// Connectors --------------------
+      // Connectors --------------------
       connect(DroneHeight, DroneHeightOut) annotation(
         Line(points = {{-34, -42}, {30, -42}, {30, -84}}, color = {0, 0, 127}));
       connect(MeasHeightProfile, add.u1) annotation(
@@ -795,7 +774,7 @@ package Drone
         Line(points = {{22, 2}, {58, 2}, {58, -84}}, color = {0, 0, 127}));
       connect(ramp.y, add.u2) annotation(
         Line(points = {{-48, -4}, {-2, -4}}, color = {0, 0, 127}));
-// Annotation -------------------
+      // Annotation -------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {1, -1}, rotation = 180, extent = {{-97, 97}, {97, -97}}, fileName = "modelica://Drone/pictures/sensor.png")}),
         Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}})),
@@ -812,20 +791,20 @@ package Drone
 <h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span></strong></span></h1>
 
 <table>
-	<thead>
-		<tr>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">height</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> height difference in ramp block</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">20m</span></span></td>
-		</tr>
-	</tbody>
+ <thead>
+  <tr>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">height</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> height difference in ramp block</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">20m</span></span></td>
+  </tr>
+ </tbody>
 </table>
 <hr>
 <h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span></strong></span></h1>
@@ -841,7 +820,7 @@ package Drone
     // Annotation --------------------
     annotation(
       Icon(graphics = {Bitmap(rotation = 180, extent = {{-97, 97}, {97, -97}}, fileName = "modelica://Drone/pictures/sensor.png")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Sensor\" package contains models for sensors that can be used for the topological flight of a drone.</font></p>
 
@@ -861,10 +840,10 @@ package Drone
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Equations --------------------
     equation
-// Connectors --------------------
+      // Connectors --------------------
       connect(timeTable.y, MeasHeightProfile) annotation(
         Line(points = {{12, 0}, {100, 0}}, color = {0, 0, 127}));
-// Annotation --------------------
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0, 0.5}, rotation = 180, extent = {{-99, 99.5}, {99, -99.5}}, fileName = "modelica://Drone/pictures/bitcoin-mine_2717142.png")}),
         Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
@@ -882,15 +861,15 @@ package Drone
       Connectors.RealOutput airDensity annotation(
         Placement(visible = true, transformation(origin = {2, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {3, -17}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Parameters --------------------
-      parameter Real airDensityVal(unit = "kg/m3") = 0.93;
+      parameter Real airDensityVal(unit = "kg/m3") = 0.93 "air density at height of rocky mountains";
       // Equations --------------------
     equation
-// Equation value airDensity --------------------
+      // Equation value airDensity --------------------
       airDensity = airDensityVal;
-// Annotation --------------------
+      // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0, 0.5}, rotation = 180, extent = {{-99, 99}, {99, -98}}, fileName = "modelica://Drone/pictures/tornados_4851771.png")}),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+        Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">The provided Model \"DefSensor\" representing a sensor system within a drone. This model consists of connectors, blocks, and equations to manage measured height profile data and the drone's height. </span></span></p>
 
@@ -898,19 +877,19 @@ package Drone
 <h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span></strong></span></h1>
 
 <table>
-	<thead>
-		<tr>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">airDensity</span></span></td>
-			<td style=\"text-align:center\"><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">density of the air</font></td><td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">1.225kg/m<sup>3</sup></span></span></td>
-		</tr>
-	</tbody>
+ <thead>
+  <tr>
+  	<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
+  	<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
+  	<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+  	<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">airDensity</span></span></td>
+  	<td style=\"text-align:center\"><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">density of the air</font></td><td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">1.225kg/m<sup>3</sup></span></span></td>
+  </tr>
+ </tbody>
 </table>
 
 </body></html>"));
@@ -918,7 +897,7 @@ package Drone
 
     // Equations --------------------
   equation
-// Annotation --------------------
+    // Annotation --------------------
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(extent = {{100, -100}, {-100, 100}}, fileName = "modelica://Drone/pictures/road_12812635.png")}),
       Diagram,
