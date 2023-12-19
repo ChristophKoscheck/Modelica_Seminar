@@ -28,7 +28,7 @@ legend('Soll-RPM Regler', 'Ist-RPM Propeller');
 grid on
 grid minor
 
-subplot(3,3,7:8)
+subplot(3,3,7:9)
 plot(exportedVariables.time, exportedVariables.defDroneF_g, 'b', 'LineWidth',  3.5);
 hold on;
 plot(exportedVariables.time, exportedVariables.defDroneF_y, 'g', 'LineWidth', 2.5);
@@ -36,7 +36,7 @@ hold off;
 title('Kräfte am Drohnenkörper');
 ylabel('Kraft (N)');
 xlabel('Zeit (s)');
-legend('Gewichtskraft F_g', 'Auftriebskraft F_y', 'Location','northeastoutside');
+legend('Gewichtskraft F_g', 'Auftriebskraft F_y', 'Location','northeast');
 grid on
 grid minor
 

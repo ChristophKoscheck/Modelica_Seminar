@@ -288,7 +288,7 @@ package Drone
       constant Real g = Modelica.Constants.g_n "Gravitational force (N)";
       // Parameters --------------------
       parameter Modelica.Units.SI.Length rProp = 0.203 "propeller radius";
-      parameter Real C_l = 0.34 "Lift coefficient";
+      parameter Real C_l = 0.33 "Lift coefficient";
       parameter Real C_w = 0.05 "Drag coefficient";
       parameter Real NumProp = 1 "Number of propellers";
       // Variables --------------------
@@ -461,7 +461,7 @@ package Drone
   package Battery
     model DefBattery
       // Imports --------------------
-      Modelica.Electrical.Batteries.BatteryStacks.CellStack cellStack(Np = 3, Ns = 8, SOC(fixed = true, start = 0.98), cellData = cellData) annotation(
+      Modelica.Electrical.Batteries.BatteryStacks.CellStack cellStack(Np = 3, Ns = 8, SOC(fixed = true, start = 0.96), cellData = cellData) annotation(
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Connectors --------------------
       Modelica.Electrical.Analog.Basic.Ground ground annotation(
@@ -586,7 +586,7 @@ package Drone
       // Blocks --------------------
       Modelica.Blocks.Continuous.LimPID pid(Td = Ti_d, Ti = Ti_c, k = k_c, withFeedForward = true, yMax = 900, yMin = 0) annotation(
         Placement(visible = true, transformation(origin = {0, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Electrical.Analog.Basic.Resistor resistor(R(displayUnit = "Ohm") = 30) annotation(
+      Modelica.Electrical.Analog.Basic.Resistor resistor(R(displayUnit = "Ohm") = 40) annotation(
         Placement(visible = true, transformation(origin = {2, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Parameters --------------------
       parameter Real k_c = 2;
