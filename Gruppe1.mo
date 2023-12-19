@@ -143,7 +143,7 @@ package Drone
       // Annotation --------------------
       annotation(
         Icon(graphics = {Ellipse(origin = {-1, 4}, fillColor = {37, 150, 225}, fillPattern = FillPattern.Solid, lineThickness = 1.5, extent = {{99, 94}, {-97, -102}})}, coordinateSystem(initialScale = 0.1, extent = {{-100, -100}, {100, 100}})),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The \"Winke_Moment_Connector\" model represents&nbsp;</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">a connector for 1D translational mechanical systems.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>phi</code>: Absolute rotation angle of the flange in [rad].</font></li><li><font size=\"4\"><code>tau</code>:&nbsp;Cut-torque in the flange in [Nm].</font></li></ul></body></html>"));
+  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The \"Winke_Moment_Connector\" model represents&nbsp;</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">a connector for 1D rotational mechanical systems.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>phi</code>: Absolute rotation angle of the flange in [rad].</font></li><li><font size=\"4\"><code>tau</code>:&nbsp;Cut-torque in the flange in [Nm].</font></li></ul></body></html>"));
     end Winkel_Moment_Connector;
 
     connector Weg_Kraft_Connector
@@ -173,7 +173,7 @@ package Drone
       Diagram,
   Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
-</font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Connectors\" package contains the connectors used to connect the individual components of the threats</font></p>
+</font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Connectors\" package contains the connectors used to connect the individual components of the library</font></p>
 
 </body></html>"));
   end Connectors;
@@ -195,7 +195,7 @@ package Drone
       // Constants --------------------
       constant Real g = Modelica.Constants.g_n "Earth acceleration";
       // Parameters --------------------
-      parameter Modelica.Units.SI.Mass mass = 8.310 "mass of drone";
+      parameter Modelica.Units.SI.Mass mass = 4.310 "mass of drone";
       // Variables --------------------
       Modelica.Units.SI.Velocity v_y "Velocity in vertical direction (m/s)";
       Modelica.Units.SI.Acceleration a_y "Acceleration in vertical direction (m/s^2)";
@@ -242,20 +242,20 @@ package Drone
 <h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span></strong></span></h1>
 
 <table>
-	<thead>
-		<tr>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">mass</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> total drone mass</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">8.31kg</span></span></td>
-		</tr>
-	</tbody>
+ <thead>
+  <tr>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">mass</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> total drone mass</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">4.31kg</span></span></td>
+  </tr>
+ </tbody>
 </table>
 
 <hr>
@@ -283,7 +283,7 @@ package Drone
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.02),
   Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
-</font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Body\" package contains the basic body of a drone which includes the technical information of the drone</font></p>
+</font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Body\" package contains the basic body of a drone which includes the technical information of the drone and calculates the drone movement.</font></p>
 
 </body></html>"));
   end Body;
@@ -302,8 +302,8 @@ package Drone
       constant Real g = Modelica.Constants.g_n "Gravitational force (N)";
       // Parameters --------------------
       parameter Modelica.Units.SI.Length rProp = 0.203 "propeller radius";
-      parameter Real C_l = 0.33 "Lift coefficient";
-      parameter Real C_w = 0.05 "Drag coefficient";
+      parameter Real C_l = 0.28 "Lift coefficient";
+      parameter Real C_w = 0.09 "Drag coefficient";
       parameter Real NumProp = 1 "Number of propellers";
       // Variables --------------------
       Modelica.Units.SI.Force F_lp "Drone lift force per propeller";
@@ -350,30 +350,30 @@ package Drone
 
 
 <table>
-	<thead>
-		<tr>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">C<sub>l</sub></span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> Lift coefficient</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.34</span></span></td>
-		</tr>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">C<sub>w</sub></span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Drag coefficient</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.05</span></span></td>
-		</tr>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">NumProp</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> Number of propellers</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">1</span></span></td>
-		</tr>
-	</tbody>
+ <thead>
+  <tr>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
+   <th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">C<sub>l</sub></span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> Lift coefficient</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.34</span></span></td>
+  </tr>
+  <tr>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">C<sub>w</sub></span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Drag coefficient</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">0.05</span></span></td>
+  </tr>
+  <tr>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">NumProp</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> Number of propellers</span></span></td>
+   <td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">1</span></span></td>
+  </tr>
+ </tbody>
 </table>
 
 <hr>
@@ -387,8 +387,8 @@ package Drone
     <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Area of the propeller: </span></span>
     <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">A = π × r<sup>2</sup></span></span></p>
 <p>
-	<span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Lift Force per propeller:</span></span>
-	<span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">F<sub>lp</sub> = 0.5 × ρ × (r × ω)<sup>2</sup> × A<sub>Prop</sub> × C<sub>l</sub></span></span>
+ <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Lift Force per propeller:</span></span>
+ <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">F<sub>lp</sub> = 0.5 × ρ × (r × ω)<sup>2</sup> × A<sub>Prop</sub> × C<sub>l</sub></span></span>
 </p>
 <p>
     <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Absolute Lift Force </span></span>
@@ -697,7 +697,7 @@ package Drone
       // Blocks --------------------
       Modelica.Blocks.Continuous.LimPID pid(Td = Ti_d, Ti = Ti_c, k = k_c, withFeedForward = true, yMax = 900, yMin = 0) annotation(
         Placement(visible = true, transformation(origin = {0, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Electrical.Analog.Basic.Resistor resistor(R(displayUnit = "Ohm") = 40) annotation(
+      Modelica.Electrical.Analog.Basic.Resistor resistor(R(displayUnit = "Ohm") = 10, T_ref = 313.15) annotation(
         Placement(visible = true, transformation(origin = {2, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Parameters --------------------
       parameter Real k_c = 2;
