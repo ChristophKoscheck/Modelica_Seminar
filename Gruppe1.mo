@@ -18,7 +18,6 @@ package Drone
 
   package Examples
     extends Modelica.Icons.ExamplesPackage;
-  
 
     model DefDroneSim
       // Model Definitions --------------------
@@ -119,7 +118,53 @@ package Drone
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -4}, rotation = 180, extent = {{-110, 100}, {110, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
         experiment(StartTime = 0, StopTime = 1737.24, Tolerance = 1e-06, Interval = 0.03),
-        Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -6}, rotation = 180, extent = {{-112, 106}, {112, -106}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}));
+        Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -6}, rotation = 180, extent = {{-112, 106}, {112, -106}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
+        Documentation(info = "<html><head>
+  <title>Drone Simulation Model Documentation</title>
+</head>
+<body>
+  <h1>Drone Simulation Model Overview</h1>
+  <p><font size=\"4\">
+    This simulation model represents a drone navigating a contour flight over rocky mountains. It combines various components to simulate the drone's behavior, including environmental factors, sensors, controllers, propellers, engines, the drone body, and a battery.
+  </font></p>
+
+  <h2>Components Used in the Model</h2>
+  <table border=\"1\">
+    <tbody><tr>
+      <th>Component</th>
+      <th>Functionality</th>
+      <th>Icon</th>
+    </tr>
+    <!-- Add rows for each component, describing their functionality and including icons -->
+    <tr>
+      <td>Environment</td>
+      <td>Provides height profile data</td>
+      <td>Icon Image</td>
+    </tr>
+    <tr>
+      <td>Sensor</td>
+      <td>Measures height profile</td>
+      <td>Icon Image</td>
+    </tr>
+    <!-- Add other components with their functionality and icons -->
+  </tbody></table>
+
+  <h2>Connections and Functionality</h2>
+  <p><font size=\"4\">
+    The model connects the components to simulate the drone's flight. The controllers manage engine speed based on height data obtained by sensors, while propellers generate thrust, lifting the drone body.
+  </font></p>
+
+  <h2>Usage and Parameterization</h2>
+  <p><font size=\"4\">
+    This simulation model can be utilized to study drone flights over rugged terrains, validating flight controllers, testing battery efficiency, and optimizing propeller and engine configurations for specific flight conditions.
+  </font></p>
+
+  <h2>Simulation Details</h2>
+  <p><font size=\"4\">
+    The simulation runs for a duration of 1737.24 seconds with a time step of 0.03 seconds. It assumes a constant speed of 14 m/s for a distance of 24321.41 meters.
+  </font></p>
+
+</body></html>"));
     end DefDroneSim;
   end Examples;
 
@@ -211,7 +256,61 @@ package Drone
 // --------------------
 // Annotation --------------------
       annotation(
-        Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {-1, 0}, extent = {{99, -98}, {-98, 98}}, fileName = "modelica://Drone/pictures/food_12725960.png")}));
+        Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {-1, 0}, extent = {{99, -98}, {-98, 98}}, fileName = "modelica://Drone/pictures/food_12725960.png")}),
+  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Model Overview</strong><br>
+
+</font><p><span style=\"font-family: Verdana, Geneva, sans-serif;\"><font size=\"4\">The model \"DefDrone\" simulates the behavior of a drone in terms of its height, velocity, forces acting on it, gravitational force, and ground collision prevention. It's structured to simulate vertical motion and prevent the drone from going below ground level. </font></span></p>
+
+<hr>
+<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span></strong></span></h1>
+
+<p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">The model includes 4 connectors for engines and propellers. It also includes the connector to give out the actual drone height.</span></span></p>
+
+<hr>
+<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span></strong></span></h1>
+
+<!-- Table Paramters -->
+<!--------------------->
+<!--------------------->
+<table>
+	<thead>
+		<tr>
+			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
+			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
+			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">mass</span></span></td>
+			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"> total drone mass</span></span></td>
+			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">8.31kg</span></span></td>
+		</tr>
+	</tbody>
+</table>
+<!--End Table Paramters -->
+<!------------------------>
+<!-------Equations ------->
+<hr>
+<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span></strong></span></h1>
+
+<p>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Derivative of DroneHeightOut: </span></span>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">d/dt(x) = v<sub>y</sub></span></span>
+</p>
+<p>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Derivative of v_y: </span></span>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">d/dt(v<sub>y</sub>) = a<sub>y</sub></span></span>
+</p>
+<p>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Gravitational force: </span></span>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">F<sub>g</sub> = m × g</span></span>
+</p>
+<p>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Newton's second law: </span></span>
+    <span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">m × a<sub>y</sub> = F<sub>y</sub> - F<sub>g</sub></span></span>
+</p>
+</body></html>"));
     end DefDrone;
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {-1, -0.5}, extent = {{100, -99}, {-98, 100}}, fileName = "modelica://Drone/pictures/food_12725960.png")}),
@@ -342,23 +441,55 @@ package Drone
       annotation(
         experiment(StopTime = 150, Interval = 0.3, StartTime = 0, Tolerance = 1e-06),
         Documentation(info = "<html>
-    <p>This model demonstrates how a speed controller for a current controlled DC PM drive works.</p>
+<head></head>
+<body>
+  <font size=\"6\">
+    <strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">
+      Model Overview
+    </strong>
+    <br>
+  </font>
+  <p>
+    <!--StartFragment-->
+    <font size=\"4\">
+      <span style=\"font-family: 'Segoe WPC', 'Segoe UI', sans-serif; font-variant-ligatures: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255);\">
+        This Modelica model represents a speed-controlled DC PM drive utilizing an H-bridge configuration from a battery. It simulates the behavior of an electrical machine, specifically a drone motor, by managing various parameters and control mechanisms.
+      </span>
+      &nbsp;
+    </font>
+  </p>
+
+  <hr>
+  <h1>
+    <span style=\"color:#2980b9\">
+      <strong>
+        <span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span>
+      </strong>
+    </span>
+  </h1>
+  <font size=\"4\">
+    <strong>Parameters:</strong>
+  </font>
+  <!-- Include specific information about the parameters and their significance in the model -->
+
+  <hr>
+  <h1>
+    <span style=\"color:#2980b9\">
+      <strong>
+        <span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span>
+      </strong>
+    </span>
+  </h1>
+  <div>
     <p>
-    The inner current controller is parameterized according to the absolute optimum.
-    The outer control loop is formed by the speed controller which is parameterized according to the symmetrical optimum.
+      <font size=\"4\">
+        This electrical machine model is governed by complex connections, control mechanisms, and equations that manage torque, speed, current, and voltage interactions within the system.
+      </font>
     </p>
-    <p>
-    At time=0.2 s a reference speed step is applied, causing the drive to accelerate to the desired speed.
-    At time=0.8 s a load torque step is applied, causing the drive to decelerate until the speed controller brings the drive back to the desired speed.
-    </p>
-    <p>
-    You may try a slewRateLimiter instead of the prefilter to limit the speed rise i.e. the torque.
-    </p>
-    <p>
-    Further reading:
-    <a href=\"modelica://Modelica/Resources/Documentation/Electrical/Machines/DriveControl.pdf\">Tutorial at the Modelica Conference 2017</a>
-    </p>
-    </html>"),
+  </div>
+  <!-- You might want to add more information regarding the equations specific to the electrical machine if available -->
+</body>
+</html>"),
         Diagram(coordinateSystem(extent = {{-200, -100}, {100, 100}})),
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/electric-motor_5770153.png")}));
     end DefEngine;
@@ -398,7 +529,80 @@ package Drone
 // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0.5, 0}, rotation = 180, extent = {{-99, 100}, {100, -100}}, fileName = "modelica://Drone/pictures/power-bank_5735222.png")}),
-        experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-6, Interval = 0.04));
+        experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-6, Interval = 0.04),
+  Documentation(info = "<html><head></head>
+<body>
+  <font size=\"6\">
+    <strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">
+      Model Overview
+    </strong>
+    <br></font><p>
+    <!--StartFragment-->
+    
+      <span style=\"font-size: large;\">This Modelica model represents a battery system composed of cell stacks. It simulates the behavior of battery cells within the stack, managing the voltage, state of charge, and other parameters.</span>
+    </font>
+  </p>
+
+  <hr>
+  <h1>
+    <span style=\"color:#2980b9\">
+      <strong>
+        <span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span>
+      </strong>
+    </span>
+  </h1>
+  <font size=\"4\">
+    <strong>Connectors:</strong></font><ul>
+    <li>
+      <font size=\"4\">
+        <code>pin_pos</code>: Electrical interface positive pin.
+      </font>
+    </li>
+    <li>
+      <font size=\"4\">
+        <code>pin_neg</code>: Electrical interface negative pin.
+      </font>
+    </li>
+  </ul><div><font size=\"4\"><b>Blocks:&nbsp;</b></font></div><div><ul><li><font size=\"4\"><code>cellStack</code>: Represents the battery cell stack composed of multiple cells.</font></li><li><font size=\"4\"><code>ground</code>: Electrical ground.</font><!--EndFragment--></li></ul></div>
+
+  <hr>
+  <h1>
+    <span style=\"color:#2980b9\">
+      <strong>
+        <span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span>
+      </strong>
+    </span>
+  </h1>
+  <font size=\"4\">
+    <strong>Parameters:</strong>
+  </font>
+  <ul>
+    <li>
+      <font size=\"4\">
+        <code>cellData</code>: Defines characteristics of battery cells (OCVmax, OCVmin, Qnom, Ri).
+      </font>
+    </li>
+  </ul>
+
+  <hr>
+  <h1>
+    <span style=\"color:#2980b9\">
+      <strong>
+        <span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span>
+      </strong>
+    </span>
+  </h1>
+  <div>
+    <p>
+      <font size=\"4\">
+        This battery model is governed by electrical connections and cell behavior equations that manage the flow of current and voltage across the stack.
+      </font>
+    </p>
+  </div>
+  <!-- You might want to add more information regarding the equations specific to the battery behavior if available -->
+
+
+</body></html>"));
     end DefBattery;
 
     // Equations --------------------
@@ -454,7 +658,35 @@ package Drone
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {1, 0}, rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/motherboard_2656219.png")}),
         experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-6, Interval = 0.002),
-        Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
+        Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}})),
+  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Model Overview</strong><br>
+
+</font><p><!--StartFragment--><font size=\"4\"><span style=\"font-family: 'Segoe WPC', 'Segoe UI', sans-serif; font-variant-ligatures: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255);\">This Modelica model represents the flight controller for a drone designed to execute contour flight maneuvers. It manages the drone's engine speed based on measured height profiles and reference inputs.</span>&nbsp;</font></p>
+
+<hr>
+<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span></strong></span></h1>
+
+<font size=\"4\"><strong>Connectors:</strong>
+    </font><ul>
+      <li><font size=\"4\"><code>RefEngineSpeed</code>: RealOutput connector for reference engine speed.</font></li>
+      <li><font size=\"4\"><code>DroneHeightOut</code>: RealInput connector for drone height output.</font></li>
+      <li><font size=\"4\"><code>MeasHeightProfileOut</code>: RealInput connector for measured height profile output.</font></li>
+      <li><font size=\"4\"><code>pin_pos</code>: Electrical interface positive pin.</font></li>
+      <li><font size=\"4\"><code>pin_neg</code>: Electrical interface negative pin.</font></li>
+    </ul>
+    
+    <font size=\"4\"><strong>Blocks:</strong>
+    </font><ul>
+      <li><font size=\"4\"><code>pid</code>: Continuous PID controller with specified parameters.</font></li>
+      <li><font size=\"4\"><code>resistor</code>: Basic electrical resistor with resistance set to 30 Ohms, used to simulate power consumption by controller, sensor, cameras, ...</font></li></ul>
+
+<hr>
+<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span></strong></span></h1>
+
+<font size=\"4\"><strong>Parameters:</strong></font><ul><li><font size=\"4\"><code>k_c</code>: Proportional gain.</font></li><li><font size=\"4\"><code>Ti_c</code>: Integral time constant.</font></li><li><font size=\"4\"><code>Ti_d</code>: Derivative time constant.</font></li></ul><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>rpmRef</code>: Real variable representing engine speed in RPM (revolutions per minute) for better model validation.</font></li></ul>
+
+<hr>
+<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span></strong></span></h1><div><p><font size=\"4\">The general form of a PID controller equation is:</font></p><p style=\"font-family: 'Courier New', monospace;\"><font size=\"4\">y(t) = Kp * e(t) + Ki * ∫(e(t) dt) + Kd * d(e(t))/dt</font></p><p><font size=\"4\">Where:</font></p><ul><li><font size=\"4\"><code>y(t)</code>: Controller output at time&nbsp;<em>t</em>.</font></li><li><font size=\"4\"><code>e(t)</code>: Deviation or error at time&nbsp;<em>t</em>&nbsp;(difference between desired setpoint and measured value).</font></li><li><font size=\"4\"><code>Kp</code>: Proportional gain.</font></li><li><font size=\"4\"><code>Ki</code>: Integral gain.</font></li><li><font size=\"4\"><code>Kd</code>: Derivative gain.</font></li><li><font size=\"4\">∫: Represents integration.</font></li><li><font size=\"4\">d/dt: Represents differentiation with respect to time.</font></li></ul><p><font size=\"4\">This equation adjusts the controller's output based on the proportional, integral, and derivative terms to minimize the error and regulate the system.</font></p></div></body></html>"));
     end DefController;
   equation
 

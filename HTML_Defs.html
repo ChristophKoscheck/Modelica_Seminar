@@ -200,3 +200,80 @@
 
 <!-- End Path: HTML_Defs.html -->
 </body></html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flight Controller Model Documentation</title>
+</head>
+<body>
+  <h1>Flight Controller Model Documentation</h1>
+  
+  <h2>Model Overview</h2>
+  <p>
+    This Modelica model represents the flight controller for a drone designed to execute contour flight maneuvers. It manages the drone's engine speed based on measured height profiles and reference inputs.
+  </p>
+  
+  <h2>Model: DefController</h2>
+  <p>
+    <strong>Connectors:</strong>
+    <ul>
+      <li><code>RefEngineSpeed</code>: RealOutput connector for reference engine speed.</li>
+      <li><code>DroneHeightOut</code>: RealInput connector for drone height output.</li>
+      <li><code>MeasHeightProfileOut</code>: RealInput connector for measured height profile output.</li>
+      <li><code>pin_pos</code>: Electrical interface positive pin.</li>
+      <li><code>pin_neg</code>: Electrical interface negative pin.</li>
+    </ul>
+    
+    <strong>Blocks:</strong>
+    <ul>
+      <li><code>pid</code>: Continuous PID controller with specified parameters.</li>
+      <li><code>resistor</code>: Basic electrical resistor with resistance set to 30 Ohms.</li>
+    </ul>
+    
+    <strong>Parameters:</strong>
+    <ul>
+      <li><code>k_c</code>: Proportional gain set to 2.</li>
+      <li><code>Ti_c</code>: Integral time constant set to 10.</li>
+      <li><code>Ti_d</code>: Derivative time constant set to 0.8.</li>
+    </ul>
+    
+    <strong>Variables:</strong>
+    <ul>
+      <li><code>rpmRef</code>: Real variable representing engine speed in RPM (revolutions per minute).</li>
+    </ul>
+  </p>
+  
+  <h2>Equations</h2>
+  <p>
+    <strong>Connectors:</strong>
+    <ul>
+      <li>Establishes connections between input and output connectors for height control and engine speed regulation.</li>
+    </ul>
+    
+    <strong>Equation Conversion:</strong>
+    <ul>
+      <li>Converts radians per second to RPM for engine speed reference.</li>
+    </ul>
+  </p>
+  
+  <h2>Annotations</h2>
+  <p>
+    <strong>Icon:</strong>
+    <ul>
+      <li>Displays an icon representing the model with a motherboard image.</li>
+    </ul>
+    
+    <strong>Experiment:</strong>
+    <ul>
+      <li>Defines experiment parameters such as start time, stop time, tolerance, and interval for simulation.</li>
+    </ul>
+    
+    <strong>Diagram:</strong>
+    <ul>
+      <li>Specifies the coordinate system for the diagram representation of the model.</li>
+    </ul>
+  </p>
+  
+</body>
+</html>
