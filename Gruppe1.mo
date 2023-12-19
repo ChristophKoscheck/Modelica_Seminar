@@ -125,7 +125,7 @@ package Drone
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -4}, rotation = 180, extent = {{-110, 100}, {110, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
         experiment(StartTime = 0, StopTime = 1737.24, Tolerance = 1e-06, Interval = 0.01),
         Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, -6}, rotation = 180, extent = {{-112, 106}, {112, -106}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
-        Documentation);
+        Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The provided Model \"DefDroneSim\" representing a example simulation of a drone, flying over the rocky mountains within 28 minutes. T</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">he distance between the drone and the ground is 20 meters.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The model includes following components:</span></span></p><ul style=\"font-family: Verdana, Geneva, sans-serif;\"><li><font size=\"4\">DefBody</font></li><li><font size=\"4\">DefPropeller</font></li><li><font size=\"4\">DefEngine</font></li><li><font size=\"4\">DefBatterie</font></li><li><font size=\"4\">DefController</font></li><li><font size=\"4\">DefSensor</font></li><li><font size=\"4\">DefHeightProfile</font></li><li><font size=\"4\">DefAir</font></li></ul><blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\"><p></p></blockquote><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Simulation</span></strong></span></h1><font size=\"4\">In this example, the battery has a remaining capacity of 5.7% at the end of the simulation</font></body></html>"));
     end DefDroneSim;
     annotation(
       Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
@@ -143,7 +143,7 @@ package Drone
       // Annotation --------------------
       annotation(
         Icon(graphics = {Ellipse(origin = {-1, 4}, fillColor = {37, 150, 225}, fillPattern = FillPattern.Solid, lineThickness = 1.5, extent = {{99, 94}, {-97, -102}})}, coordinateSystem(initialScale = 0.1, extent = {{-100, -100}, {100, 100}})),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The \"Winke_Moment_Connector\" model represents&nbsp;</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">a connector for 1D rotational mechanical systems.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>phi</code>: Absolute rotation angle of the flange in [rad].</font></li><li><font size=\"4\"><code>tau</code>:&nbsp;Cut-torque in the flange in [Nm].</font></li></ul></body></html>"));
+        Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br></font><p><span style=\"font-size: 14px;\"><span style=\"font-family: Verdana, Geneva, sans-serif;\">The \"Winke_Moment_Connector\" model represents&nbsp;</span></span><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">a connector for 1D rotational mechanical systems.</font></p><hr><h1><span style=\"color: rgb(41, 128, 185);\"><strong><span style=\"font-family: Verdana, Geneva, sans-serif;\">Model Structure</span></strong></span></h1><font size=\"4\"><strong>Variables:</strong></font><ul><li><font size=\"4\"><code>phi</code>: Absolute rotation angle of the flange in [rad].</font></li><li><font size=\"4\"><code>tau</code>:&nbsp;Cut-torque in the flange in [Nm].</font></li></ul></body></html>"));
     end Winkel_Moment_Connector;
 
     connector Weg_Kraft_Connector
@@ -171,7 +171,7 @@ package Drone
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0, 1}, extent = {{100, -99}, {-100, 99}}, fileName = "modelica://Drone/pictures/power-cable_5770130.png")}),
       Diagram,
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Connectors\" package contains the connectors used to connect the individual components of the library</font></p>
 
@@ -281,7 +281,7 @@ package Drone
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {-1, -0.5}, extent = {{100, -99}, {-98, 100}}, fileName = "modelica://Drone/pictures/food_12725960.png")}),
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-06, Interval = 0.02),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Body\" package contains the basic body of a drone which includes the technical information of the drone and calculates the drone movement.</font></p>
 
@@ -498,8 +498,7 @@ package Drone
 // Annotation --------------------
       annotation(
         experiment(StopTime = 150, Interval = 0.3, StartTime = 0, Tolerance = 1e-06),
-        Documentation(info = "<html>
-<head></head>
+        Documentation(info = "<html><head></head>
 <body>
   <font size=\"6\">
     <strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">
@@ -509,28 +508,10 @@ package Drone
   </font>
   <p>
     <!--StartFragment-->
-    <font size=\"4\">
-      <span style=\"font-family: 'Segoe WPC', 'Segoe UI', sans-serif; font-variant-ligatures: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255);\">
+    
+      <font face=\"Verdana\"><span style=\"font-variant-ligatures: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255);\"><font size=\"4\">
         This Modelica model represents a speed-controlled DC PM drive utilizing an H-bridge configuration from a battery. It simulates the behavior of an electrical machine, specifically a drone motor, by managing various parameters and control mechanisms.
-      </span>
-      &nbsp;
-    </font>
-  </p>
-
-  <hr>
-  <h1>
-    <span style=\"color:#2980b9\">
-      <strong>
-        <span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span>
-      </strong>
-    </span>
-  </h1>
-  <font size=\"4\">
-    <strong>Parameters:</strong>
-  </font>
-  <!-- Include specific information about the parameters and their significance in the model -->
-
-  <hr>
+      </font></span><font size=\"4\">&nbsp;</font> </font><font size=\"4\"><font face=\"Verdana\">&nbsp; &nbsp; </font>&nbsp;&nbsp;</font></p><hr>
   <h1>
     <span style=\"color:#2980b9\">
       <strong>
@@ -546,8 +527,8 @@ package Drone
     </p>
   </div>
   <!-- You might want to add more information regarding the equations specific to the electrical machine if available -->
-</body>
-</html>"),
+
+</body></html>"),
         Diagram(coordinateSystem(extent = {{-200, -100}, {100, 100}})),
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/electric-motor_5770153.png")}));
     end DefEngine;
@@ -557,7 +538,7 @@ package Drone
       Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/electric-motor_5770153.png")}),
       Diagram,
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-6, Interval = 0.02),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Engine\" package contains models for engines that can be used to power the drones propellers.</font></p>
 
@@ -673,7 +654,7 @@ package Drone
 // Annotation --------------------
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0.5, 0}, rotation = 180, extent = {{-99, 100}, {100, -100}}, fileName = "modelica://Drone/pictures/power-bank_5735222.png")}),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Battery\" package contains battery models that can be used to power the drone.</font></p>
 
@@ -760,7 +741,7 @@ package Drone
 
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(rotation = 180, extent = {{-99, 99}, {99, -99}}, fileName = "modelica://Drone/pictures/motherboard_2656219.png")}),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Controller\" package contains models for controllers that can be used to regulate the power supply, speed and height of the drones engine.</font></p>
 
@@ -841,7 +822,7 @@ package Drone
     // Annotation --------------------
     annotation(
       Icon(graphics = {Bitmap(rotation = 180, extent = {{-97, 97}, {97, -97}}, fileName = "modelica://Drone/pictures/sensor.png")}, coordinateSystem(extent = {{-100, -100}, {100, 100}})),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+      Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><font face=\"Verdana, Geneva, sans-serif\" size=\"4\">The \"Sensor\" package contains models for sensors that can be used for the topological flight of a drone.</font></p>
 
@@ -890,7 +871,7 @@ package Drone
 // Annotation --------------------
       annotation(
         Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {0, 0.5}, rotation = 180, extent = {{-99, 99}, {99, -98}}, fileName = "modelica://Drone/pictures/tornados_4851771.png")}),
-  Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
+        Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
 
 </font><p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">The provided Model \"DefSensor\" representing a sensor system within a drone. This model consists of connectors, blocks, and equations to manage measured height profile data and the drone's height. </span></span></p>
 
@@ -932,7 +913,7 @@ package Drone
     Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, 5}, rotation = 180, extent = {{-136, 101}, {137, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
     uses(Modelica(version = "4.0.0")),
     Documentation(info = "<html>
-<img src=\"modelica://Drone.ressources/Postervorlage-01.png\" style=\"width:100.0%\"> </img>
+<img src=\"modelica://Drone/pictures/Postervorlage-01.png\" style=\"width:100.0%\"> </img>
 </html>", __OpenModelica_infoHeader = "<html><head></head><body><h1><span style=\"color:#2980b9\"><span style=\"font-size:36px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Modelica Drone Documentation</strong></span></span></span></h1>
 
 <hr>
