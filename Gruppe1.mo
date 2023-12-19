@@ -735,70 +735,12 @@ package Drone
     annotation(
       Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(extent = {{100, -100}, {-100, 100}}, fileName = "modelica://Drone/pictures/road_12812635.png")}),
       Diagram,
-  Documentation(info = "<html>
-<img src=\"modelica://Drone.ressources/Postervorlage-01.png\" style=\"width:80.0%\"> </img>
-</html>"));
+  Documentation (info = "<html></html>"));
   end Environment;
   annotation(
     Icon(coordinateSystem(grid = {1, 1}, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(origin = {2, 5},rotation = 180,extent = {{-136, 101}, {137, -100}}, fileName = "modelica://Drone/pictures/top_view_drone_free.png")}),
     uses(Modelica(version = "4.0.0")),
-    Documentation(info = "<html><head></head><body><font size=\"6\"><strong style=\"font-family: Verdana, Geneva, sans-serif; color: rgb(41, 128, 185);\">Introduction</strong><br>
-
-</font><p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Brief overview and introduction to the Modelica model.</span></span></p>
-
-<hr>
-<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Model Structure</span></strong></span></h1>
-
-<p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description of the model structure and its components.</span></span></p>
-
-<hr>
-<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameters</span></strong></span></h1>
-
-<table>
-	<thead>
-		<tr>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description</span></span></th>
-			<th style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value</span></span></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Parameter 1</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description of Parameter 1</span></span></td>
-			<td style=\"text-align:center\"><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Value 1</span></span></td>
-		</tr>
-	</tbody>
-</table>
-
-<hr>
-<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Equations</span></strong></span></h1>
-
-<p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Explanation and description of the equations used in the model.</span></span></p>
-
-<hr>
-<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Simulation Results</span></strong></span></h1>
-
-<p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Summary of simulation results and analysis.</span></span></p>
-
-<hr>
-<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Images</span></strong></span></h1>
-
-<p><span style=\"font-family:Verdana,Geneva,sans-serif\"><img src=\"path_to_image.jpg\" style=\"width:80.0%\"></span></p>
-
-<p><span style=\"font-size:14px\"><span style=\"font-family:Verdana,Geneva,sans-serif\">Description of the image</span></span></p>
-
-<hr>
-<h1><span style=\"color:#2980b9\"><strong><span style=\"font-family:Verdana,Geneva,sans-serif\">Formulas</span></strong></span></h1>
-
-<p><span style=\"font-size:14px\"><span style=\"font-family:Georgia,serif\">F = m ⋅ a</span></span></p>
-
-<hr>
-<p>&nbsp;</p></body></html>", __OpenModelica_infoHeader = "<html><head></head><body><h1><span style=\"color:#2980b9\"><span style=\"font-size:36px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Modelica Model Documentation</strong></span></span></span></h1>
-
-<hr>
-<p><span style=\"color:#2c3e50\"><span style=\"font-family: Verdana, Geneva, sans-serif;\"><strong><font size=\"5\">Modelica Seminar</font><span style=\"font-size: 16px;\"> </span><font size=\"5\">|&nbsp;</font></strong></span><strong><font size=\"5\">WS23/24 |</font>&nbsp;</strong><span style=\"font-family: Verdana, Geneva, sans-serif;\"><strong><font size=\"5\">MMS 1</font></strong></span></span></p>
-
-<p><span style=\"color:#2c3e50\"><span style=\"font-size:16px\"><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Christoph Koscheck, Alexander Leitz,&nbsp;</strong></span><span style=\"font-family:Verdana,Geneva,sans-serif\"><strong>Paul Smidt</strong></span></span></span></p>
-<hr></body></html>"));
+    Documentation(info = "<html>
+<img src=\"modelica://Drone.ressources/Postervorlage-01.png\" style=\"width:100.0%\"> </img>
+</html>", __OpenModelica_infoHeader = "<html><head></head><body><br></body></html>"));
 end Drone;
